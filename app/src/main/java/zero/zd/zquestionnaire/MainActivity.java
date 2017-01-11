@@ -151,7 +151,24 @@ public class MainActivity extends AppCompatActivity {
         mQnAList.add(new QnA("Code generation and the testing.", "Construction"));
         mQnAList.add(new QnA("Delivered to the customer who evaluates the products and provides feedback based on the evaluation.",
                 "Deployment"));
-        mQnAList.add(new QnA("", ""));
+        mQnAList.add(new QnA("Assess progress against the plan and take actions to maintain the schedule. ",
+                "Tracking and Control"));
+        mQnAList.add(new QnA("Assesses risks that may affect the outcome and quality.", "Risk management"));
+        mQnAList.add(new QnA("Defines and conduct activities to ensure quality.", "Software quality assurance"));
+        mQnAList.add(new QnA("assesses work products to uncover and remove errors before going to the next activity.",
+                "Technical reviews"));
+        mQnAList.add(new QnA("define and collects process, project, and product measures to ensure stakeholder’s needs are met.",
+                "Measurement"));
+        mQnAList.add(new QnA("manage the effects of change throughout the software process. ",
+                "Software config mgmt."));
+        mQnAList.add(new QnA("defines criteria for work product reuse and establishes mechanism to achieve reusable components.",
+                "Reusability management"));
+        mQnAList.add(new QnA("create work products such as models, documents, logs, forms and lists.",
+                "Product Preparation and Production"));
+        mQnAList.add(new QnA("Models stress detailed definition, identification, and application of process activates and tasks.",
+                "Prescriptive Process"));
+        mQnAList.add(new QnA("Emphasize project “agility” and follow a set of principles that lead to a more informal approach to software process.",
+                "Agile process models "));
 
         Collections.shuffle(mQnAList);
     }
