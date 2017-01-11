@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -75,17 +74,13 @@ public class MainActivity extends AppCompatActivity {
         buttonClick(view, 0);
     }
 
-    public void onClickButtonTwo(View view) {
-        buttonClick(view, 1);
-    }
+    public void onClickButtonTwo(View view) { buttonClick(view, 1); }
 
     public void onClickButtonThree(View view) {
         buttonClick(view, 2);
     }
 
-    public void onClickButtonFour(View view) {
-        buttonClick(view, 3);
-    }
+    public void onClickButtonFour(View view) { buttonClick(view, 3); }
 
     private void populateQnA() {
         mQnAList = new ArrayList<>();
@@ -180,9 +175,16 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle("Finished!");
-            // TODO: set message if passed or failed
-            alertDialog.setMessage("");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+
+            // get passing
+            String assessment = "Failed!";
+            int passingCorrectPoints = mQnAList.size() / 2;
+            if (mCorrect >= passingCorrectPoints)
+                assessment = "Passed!";
+
+            alertDialog.setMessage(assessment + "\nYou got: " + mCorrect + "/"
+                    + mQnAList.size() + ".");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isRandomIndexExists(int[] arr, int target) {
-        // same index and same answer
+        // false if same index and same answer
         for (int x : arr)
             if (x == target
                     || mQnAList.get(x).getAnswer().equalsIgnoreCase(mQnAList.get(target).getAnswer()))
