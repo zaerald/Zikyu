@@ -11,6 +11,7 @@ public class QnA {
     private String answer;
 
     public QnA(String question, String answer) {
+        question = question.substring(0, 1).toUpperCase() + question.substring(1);
         this.question = question;
         this.answer = answer;
     }
