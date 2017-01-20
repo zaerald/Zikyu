@@ -224,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
         if (!mIsFinished) initQnA();
     }
 
-
     /**
      * Method to initialize a question and answer,
      * updates GUI and will run on every increment of mQnAIndex
@@ -234,10 +233,10 @@ public class MainActivity extends AppCompatActivity {
         textQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
 
         int[] randIndices = new int[3];
-        randIndices[0] = getRandomIndex(mQnAList.size());
+        randIndices[0] = getRandomIndex();
         for (int i = 1; i < 3; i++) {
             while (true) {
-                int x = getRandomIndex(mQnAList.size());
+                int x = getRandomIndex();
                 if (!isRandomIndexExists(randIndices, x)) {
                     randIndices[i] = x;
                     break;
@@ -276,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if the answer index generated from getRandomIndex(int)
+     * Checks if the answer index generated from {@code getRandomIndex()}
      * if the index already exists on the generated index on array
      * randIndices for 3 invalid answers
      *
@@ -287,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
      *          newly generated index of answer
      *      {@code false}
      *
-     * @see #getRandomIndex(int)
+     * @see #getRandomIndex()
      */
     private boolean isRandomIndexExists(int[] arr, int target) {
         // false if same index and same answer
@@ -301,13 +300,13 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Generates an invalid random answer index and returns an index
      * which is not the same as the answer
-     * @param size the size of the qna
+     *
      * @return random index
      */
-    private int getRandomIndex(int size) {
+    private int getRandomIndex() {
         Random random = new Random();
         while (true) {
-            int x = random.nextInt(size);
+            int x = random.nextInt(mQnAList.size());
             if (x != mQnAIndex) return x;
         }
     }
