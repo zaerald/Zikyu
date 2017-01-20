@@ -100,76 +100,76 @@ public class MainActivity extends AppCompatActivity {
                 "Software Engineering"));
         mQnAList.add(new QnA("Often dominate computer system costs. The costs of software on a PC are often greater than the hardware cost",
                 "Software costs"));
-        mQnAList.add(new QnA("Is developed or engineered , it is not manufactured in the classical sense which has quality problem",
-                "Software"));
-        mQnAList.add(new QnA("A software application such as compilers, editors, file management utilities",
-                "System Software"));
-        mQnAList.add(new QnA("A stand-alone programs for specific needs", "Application Software"));
-        mQnAList.add(new QnA("Characterized by \"number crunching\" algorithms, such as automotive stress analysis, molecular biology, orbital dynamics etc.",
-                "Engineering/Scientific Software"));
-        mQnAList.add(new QnA("Resides within a product or system", "Embedded Software"));
-        mQnAList.add(new QnA("Foccus on a limited marketplace to address mass consumer market",
-                "Product-line Software"));
-        mQnAList.add(new QnA("Network centric software, more sophisticated computing environment is supported integrated with remote database and business application",
-                "WebApps"));
-        mQnAList.add(new QnA("Software uses non-commercial algorithm to solve complex problems",
-                "AI"));
-        mQnAList.add(new QnA("Pervasive, ubiquitous, distributed computing due to wireless networking",
-                "Open world computing"));
-        mQnAList.add(new QnA("The web as a computing engine. How to architect simple and sophisticated applications to target end-users worldwide.",
-                "Netsourcing"));
-        mQnAList.add(new QnA("\"free\" source code open to the computing community", "Open Source"));
-        mQnAList.add(new QnA("Is The establishment and use of sound engineering principles n order to obtain economically software that is reliable and works efficiently on real machines",
-                "Software Engineering"));
-        mQnAList.add(new QnA("The application of a semantic disciplined, quantifiable approach to the development, operation, and maintenance of software",
-                "Software Engineering"));
-        mQnAList.add(new QnA("Computer programs, data structures and associated documentation. Software products may be developed for a particular customer or may be developed for a general market.",
-                "Software"));
-        mQnAList.add(new QnA("Characteristic of software that should be written in such a way so that it can evolve to meet the changing needs of customers. This is a critical attribute because software change is an inevitable requirement of a changing business environment.",
-                "Maintainability"));
-        mQnAList.add(new QnA("Software dependability includes a range of characteristics including reliability, security and safety. Dependable software should not cause physical or economic damage in the event of system failure. Malicious users should not be  able to access or damage the system.",
-                "Dependability and security"));
-        mQnAList.add(new QnA("Software should not make wasteful use of system resources such as memory and processor cycles. Efficiency therefore includes responsiveness, processing time, memory utilisation, etc.",
-                "Efficiency"));
-        mQnAList.add(new QnA("Software must be acceptable to the type of users for which it is designed. This means that it must be understandable, usable and compatible with other systems that they use.",
-                "Acceptability"));
-        mQnAList.add(new QnA("Provides automated or semi-automated support for the process and methods",
-                "Tools"));
-        mQnAList.add(new QnA("Provides technical how-to’s for building software. It encompasses many tasks including communication, requirement analysis, design modeling, program construction, testing and support.",
-                "Method"));
-        mQnAList.add(new QnA("The foundation defines a framework with activities for effective delivery of software engineering technology. Establish the context where products (model, data, report, and forms) are produced, milestone are established, quality is ensured and change is managed",
-                "Process Layer"));
-        mQnAList.add(new QnA("Is a collection of activities, actions and tasks that are performed when some work product is to be created.",
-                "Process"));
-        mQnAList.add(new QnA("Is to deliver software in a timely manner and with sufficient quality to satisfy those who have sponsored its creation and those who will use it.",
-                "Purpose of Process"));
-        mQnAList.add(new QnA("Communicate with customer to understand objectives and gather requirements",
-                "Communication"));
-        mQnAList.add(new QnA("Creates a “map” defines the work by describing the tasks, risks and resources, work products and work schedule.",
-                "Planning"));
-        mQnAList.add(new QnA("Create a “sketch”, what it looks like architecturally, how the constituent parts fit together and other characteristics.",
-                "Modelling"));
-        mQnAList.add(new QnA("Code generation and the testing.", "Construction"));
-        mQnAList.add(new QnA("Delivered to the customer who evaluates the products and provides feedback based on the evaluation.",
-                "Deployment"));
-        mQnAList.add(new QnA("Assess progress against the plan and take actions to maintain the schedule. ",
-                "Tracking and Control"));
-        mQnAList.add(new QnA("Assesses risks that may affect the outcome and quality.", "Risk management"));
-        mQnAList.add(new QnA("Defines and conduct activities to ensure quality.", "Software quality assurance"));
-        mQnAList.add(new QnA("assesses work products to uncover and remove errors before going to the next activity.",
-                "Technical reviews"));
-        mQnAList.add(new QnA("define and collects process, project, and product measures to ensure stakeholder’s needs are met.",
-                "Measurement"));
-        mQnAList.add(new QnA("manage the effects of change throughout the software process. ",
-                "Software config mgmt."));
-        mQnAList.add(new QnA("defines criteria for work product reuse and establishes mechanism to achieve reusable components.",
-                "Reusability management"));
-        mQnAList.add(new QnA("create work products such as models, documents, logs, forms and lists.",
-                "Product Preparation and Production"));
-        mQnAList.add(new QnA("Models stress detailed definition, identification, and application of process activates and tasks.",
-                "Prescriptive Process"));
-        mQnAList.add(new QnA("Emphasize project “agility” and follow a set of principles that lead to a more informal approach to software process.",
-                "Agile process models "));
+//        mQnAList.add(new QnA("Is developed or engineered , it is not manufactured in the classical sense which has quality problem",
+//                "Software"));
+//        mQnAList.add(new QnA("A software application such as compilers, editors, file management utilities",
+//                "System Software"));
+//        mQnAList.add(new QnA("A stand-alone programs for specific needs", "Application Software"));
+//        mQnAList.add(new QnA("Characterized by \"number crunching\" algorithms, such as automotive stress analysis, molecular biology, orbital dynamics etc.",
+//                "Engineering/Scientific Software"));
+//        mQnAList.add(new QnA("Resides within a product or system", "Embedded Software"));
+//        mQnAList.add(new QnA("Foccus on a limited marketplace to address mass consumer market",
+//                "Product-line Software"));
+//        mQnAList.add(new QnA("Network centric software, more sophisticated computing environment is supported integrated with remote database and business application",
+//                "WebApps"));
+//        mQnAList.add(new QnA("Software uses non-commercial algorithm to solve complex problems",
+//                "AI"));
+//        mQnAList.add(new QnA("Pervasive, ubiquitous, distributed computing due to wireless networking",
+//                "Open world computing"));
+//        mQnAList.add(new QnA("The web as a computing engine. How to architect simple and sophisticated applications to target end-users worldwide.",
+//                "Netsourcing"));
+//        mQnAList.add(new QnA("\"free\" source code open to the computing community", "Open Source"));
+//        mQnAList.add(new QnA("Is The establishment and use of sound engineering principles n order to obtain economically software that is reliable and works efficiently on real machines",
+//                "Software Engineering"));
+//        mQnAList.add(new QnA("The application of a semantic disciplined, quantifiable approach to the development, operation, and maintenance of software",
+//                "Software Engineering"));
+//        mQnAList.add(new QnA("Computer programs, data structures and associated documentation. Software products may be developed for a particular customer or may be developed for a general market.",
+//                "Software"));
+//        mQnAList.add(new QnA("Characteristic of software that should be written in such a way so that it can evolve to meet the changing needs of customers. This is a critical attribute because software change is an inevitable requirement of a changing business environment.",
+//                "Maintainability"));
+//        mQnAList.add(new QnA("Software dependability includes a range of characteristics including reliability, security and safety. Dependable software should not cause physical or economic damage in the event of system failure. Malicious users should not be  able to access or damage the system.",
+//                "Dependability and security"));
+//        mQnAList.add(new QnA("Software should not make wasteful use of system resources such as memory and processor cycles. Efficiency therefore includes responsiveness, processing time, memory utilisation, etc.",
+//                "Efficiency"));
+//        mQnAList.add(new QnA("Software must be acceptable to the type of users for which it is designed. This means that it must be understandable, usable and compatible with other systems that they use.",
+//                "Acceptability"));
+//        mQnAList.add(new QnA("Provides automated or semi-automated support for the process and methods",
+//                "Tools"));
+//        mQnAList.add(new QnA("Provides technical how-to’s for building software. It encompasses many tasks including communication, requirement analysis, design modeling, program construction, testing and support.",
+//                "Method"));
+//        mQnAList.add(new QnA("The foundation defines a framework with activities for effective delivery of software engineering technology. Establish the context where products (model, data, report, and forms) are produced, milestone are established, quality is ensured and change is managed",
+//                "Process Layer"));
+//        mQnAList.add(new QnA("Is a collection of activities, actions and tasks that are performed when some work product is to be created.",
+//                "Process"));
+//        mQnAList.add(new QnA("Is to deliver software in a timely manner and with sufficient quality to satisfy those who have sponsored its creation and those who will use it.",
+//                "Purpose of Process"));
+//        mQnAList.add(new QnA("Communicate with customer to understand objectives and gather requirements",
+//                "Communication"));
+//        mQnAList.add(new QnA("Creates a “map” defines the work by describing the tasks, risks and resources, work products and work schedule.",
+//                "Planning"));
+//        mQnAList.add(new QnA("Create a “sketch”, what it looks like architecturally, how the constituent parts fit together and other characteristics.",
+//                "Modelling"));
+//        mQnAList.add(new QnA("Code generation and the testing.", "Construction"));
+//        mQnAList.add(new QnA("Delivered to the customer who evaluates the products and provides feedback based on the evaluation.",
+//                "Deployment"));
+//        mQnAList.add(new QnA("Assess progress against the plan and take actions to maintain the schedule. ",
+//                "Tracking and Control"));
+//        mQnAList.add(new QnA("Assesses risks that may affect the outcome and quality.", "Risk management"));
+//        mQnAList.add(new QnA("Defines and conduct activities to ensure quality.", "Software quality assurance"));
+//        mQnAList.add(new QnA("assesses work products to uncover and remove errors before going to the next activity.",
+//                "Technical reviews"));
+//        mQnAList.add(new QnA("define and collects process, project, and product measures to ensure stakeholder’s needs are met.",
+//                "Measurement"));
+//        mQnAList.add(new QnA("manage the effects of change throughout the software process. ",
+//                "Software config mgmt."));
+//        mQnAList.add(new QnA("defines criteria for work product reuse and establishes mechanism to achieve reusable components.",
+//                "Reusability management"));
+//        mQnAList.add(new QnA("create work products such as models, documents, logs, forms and lists.",
+//                "Product Preparation and Production"));
+//        mQnAList.add(new QnA("Models stress detailed definition, identification, and application of process activates and tasks.",
+//                "Prescriptive Process"));
+//        mQnAList.add(new QnA("Emphasize project “agility” and follow a set of principles that lead to a more informal approach to software process.",
+//                "Agile process models "));
 
         Collections.shuffle(mQnAList);
     }
@@ -292,7 +292,8 @@ public class MainActivity extends AppCompatActivity {
         // false if same index and same answer
         for (int x : arr)
             if (x == target
-                    || mQnAList.get(x).getAnswer().equalsIgnoreCase(mQnAList.get(target).getAnswer()))
+                    || mQnAList.get(x).getAnswer()
+                    .equalsIgnoreCase(mQnAList.get(target).getAnswer()))
                 return true;
         return false;
     }
@@ -307,7 +308,8 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         while (true) {
             int x = random.nextInt(mQnAList.size());
-            if (x != mQnAIndex) return x;
+            if (x != mQnAIndex && !mQnAList.get(x).getAnswer()
+                    .equalsIgnoreCase(mQnAList.get(mQnAIndex).getAnswer())) return x;
         }
     }
 
@@ -327,6 +329,5 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
     }
-
 
 }
