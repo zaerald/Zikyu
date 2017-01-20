@@ -70,18 +70,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickButtonOne(View view) {
-        buttonClick(view, 0);
-    }
+    public void onClickButtonOne(View view) { buttonClick(0); }
 
-    public void onClickButtonTwo(View view) { buttonClick(view, 1); }
+    public void onClickButtonTwo(View view) { buttonClick(1); }
 
     public void onClickButtonThree(View view) {
-        buttonClick(view, 2);
+        buttonClick(2);
     }
 
-    public void onClickButtonFour(View view) { buttonClick(view, 3); }
+    public void onClickButtonFour(View view) { buttonClick(3); }
 
+    /**
+     * Method used to initialize/populate data in QnAList
+     */
     private void populateQnA() {
         mQnAList = new ArrayList<>();
         mQnAList.add(new QnA("The product that software professionals build then support over long term",
@@ -173,7 +174,14 @@ public class MainActivity extends AppCompatActivity {
         Collections.shuffle(mQnAList);
     }
 
-    private void buttonClick(View view, int num) {
+    /**
+     * One method for the 4 answer buttons for DRY practice
+     * @param num
+     *      the index/position of the button clicked.
+     */
+    private void buttonClick(int num) {
+
+        View view = findViewById(R.id.activity_main);
 
         if (num != mAnswerLocationIndex) {
             if (mIsFinished)
@@ -216,6 +224,11 @@ public class MainActivity extends AppCompatActivity {
         if (!mIsFinished) initQnA();
     }
 
+
+    /**
+     * Method to initialize a question and answer,
+     * updates GUI and will run on every increment of mQnAIndex
+     */
     private void initQnA() {
         TextView textQuestion = (TextView) findViewById(R.id.text_question);
         textQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
@@ -262,6 +275,20 @@ public class MainActivity extends AppCompatActivity {
                 mQnAIndex + 1, mQnAList.size(), mCorrect, mMistake));
     }
 
+    /**
+     * Checks if the answer index generated from getRandomIndex(int)
+     * if the index already exists on the generated index on array
+     * randIndices for 3 invalid answers
+     *
+     * @param arr the array of 3 index of invalid answers
+     * @param target the newly generated index
+     * @return
+     *      {@code true} if the array randIndices already contains the
+     *          newly generated index of answer
+     *      {@code false}
+     *
+     * @see #getRandomIndex(int)
+     */
     private boolean isRandomIndexExists(int[] arr, int target) {
         // false if same index and same answer
         for (int x : arr)
@@ -271,6 +298,12 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Generates an invalid random answer index and returns an index
+     * which is not the same as the answer
+     * @param size the size of the qna
+     * @return random index
+     */
     private int getRandomIndex(int size) {
         Random random = new Random();
         while (true) {
@@ -279,6 +312,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Resets the states of the variables, for resetting QnA
+     */
     private void resetQnA() {
         mIsFinished = false;
         mQnAIndex = 0;
