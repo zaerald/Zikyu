@@ -190,19 +190,18 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Checks if the answer index generated from {@code getRandomIndex()}
      * if the index already exists on the generated index on array
-     * randIndices for 3 invalid answers
+     * {@code randIndices} for 3 invalid answers
      *
-     * @param arr the array of 3 index of invalid answers
-     * @param target the newly generated index
+     * @param arr the array of 3 index of invalid answers to check
+     * @param target the newly generated index to compare to {@code arr}
      * @return
      *      {@code true} if the array randIndices already contains the
      *          newly generated index of answer
-     *      {@code false}
+     *      {@code false} no same index or answer already existed at {@code randIndices}
      *
      * @see #getRandomIndex()
      */
     private boolean isRandomIndexExists(int[] arr, int target) {
-        // false if same index and same answer
         for (int x : arr)
             if (x == target
                     || mQnAList.get(x).getAnswer()
