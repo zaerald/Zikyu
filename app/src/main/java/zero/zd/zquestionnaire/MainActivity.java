@@ -74,9 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickButtonTwo(View view) { buttonClick(1); }
 
-    public void onClickButtonThree(View view) {
-        buttonClick(2);
-    }
+    public void onClickButtonThree(View view) { buttonClick(2); }
 
     public void onClickButtonFour(View view) { buttonClick(3); }
 
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * One method for the 4 answer buttons for DRY practice
+     * Methods for 4 answer buttons to execute same process
      * @param num
      *      the index/position of the button clicked.
      */

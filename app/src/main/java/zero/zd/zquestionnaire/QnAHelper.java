@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 /**
  * Helper class for retrieving QnA for different topics.
- *
+ * for future feature: choosing diff topics instead of 1 topic
  * Note: temporary implementation
  */
-public class QnAHelper {
+class QnAHelper {
 
-    public static ArrayList<QnA> getSoftEngQnA() {
+    static ArrayList<QnA> getSoftEngQnA() {
         ArrayList<QnA> qnaList = new ArrayList<>();
         qnaList.add(new QnA("The product that software professionals build then support over long term",
                 "Software"));
