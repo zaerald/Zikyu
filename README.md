@@ -1,6 +1,6 @@
 # ZQuestionnaire
 
-Simple reviewer in Android. Lets you answer questions in multiple choice.
+Simple reviewer in Android. Lets you answer questions in multiple choice, to practice and tackle the questions.
 
 In progress. please see future enhancements in issues tab.
 
@@ -16,7 +16,7 @@ You can run the software using emulator or physical device running on minimum ve
 
 Please follow the coding styles: https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md
 
-### Coding Styles
+### Versioning
 
 This project uses [SemVer](http://semver.org/) for versioning.
 
