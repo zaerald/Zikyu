@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickButtonFour(View view) { buttonClick(3); }
 
     /**
-     * Method used to initialize/populate data in QnAList
+     * Method used to initialize/populate QnA data into QnAList
      */
     private void populateQnA() {
         mQnAList = new ArrayList<>();
