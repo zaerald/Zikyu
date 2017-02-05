@@ -23,6 +23,7 @@ public class LoadQnaActivity extends AppCompatActivity {
     private List<String> mQnaFileList;
     private String mSelectedName;
 
+
     public static Intent getStartIntent(Context context) {
         return new Intent(context, LoadQnaActivity.class);
     }
