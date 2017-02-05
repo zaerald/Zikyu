@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class QnaActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = QnaActivity.class.getSimpleName();
 
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_qna);
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(R.string.title_qna);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         if (mQnAIndex == mQnAList.size()) {
             mIsFinished = true;
 
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(QnaActivity.this).create();
             alertDialog.setTitle("Finished!");
 
             // get passing

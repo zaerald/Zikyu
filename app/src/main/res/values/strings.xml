@@ -3,7 +3,7 @@
 
     <string name="title_qna">Question And Answer</string>
 
-
+     <!--START: QnA Activity-->
     <string name="msg_progress">Question %1$d/%2$d | C:%3$d M:%4$d</string>
     <string name="msg_correct">Correct!</string>
     <string name="msg_mistake">Mistake!</string>
