@@ -30,6 +30,9 @@ public class LoadQnaActivity extends AppCompatActivity {
         if (files.length != 0) {
             for (File f : files) {
                 String name = f.getName();
+                if (!name.contains(".zdq"))
+                    continue;
+                name = name.substring(0, name.length() - 4);
                 mQnaFileList.add(name);
             }
         }
