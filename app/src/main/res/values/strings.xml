@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ZQuestionnaire</string>
 
-    <string name="title_qna">Soft. Eng. Questions And Answer</string>
+    <string name="title_qna">Question And Answer</string>
+
 
     <string name="msg_progress">Question %1$d/%2$d | C:%3$d M:%4$d</string>
     <string name="msg_correct">Correct!</string>
@@ -11,5 +12,9 @@
     <string name="action_overflow">Overflow</string>
     <string name="action_reset">Reset QnA</string>
     <string name="action_quit">Quit</string>
+
+    <!-- START: Layout Activity-->
+    <string name="action_load_qna">Load QnA</string>
+    <string name="msg_choose_file">Choose a file to load</string>
 
 </resources>
