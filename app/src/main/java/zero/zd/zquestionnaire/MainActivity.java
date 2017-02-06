@@ -22,4 +22,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClickAnswer(View view) {
         startActivity(new Intent(this, LoadQnaActivity.class));
     }
+
+    public void onClickBuilder(View view) {
+        startActivity(new Intent(this, QnaBuilderActivity.class));
+    }
+
 }

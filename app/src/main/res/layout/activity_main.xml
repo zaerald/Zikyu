@@ -21,4 +21,15 @@
         android:layout_alignParentStart="true"
         android:onClick="onClickAnswer"/>
 
+    <Button
+        android:text="QNA Builder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_answer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:id="@+id/button_builder"
+        android:onClick="onClickBuilder"/>
+
 </RelativeLayout>

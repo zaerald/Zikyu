@@ -20,7 +20,6 @@
         <activity android:name=".LoadQnaActivity"/>
 
         <activity android:name=".QnaBuilderActivity">
-            
         </activity>
     </application>
 
