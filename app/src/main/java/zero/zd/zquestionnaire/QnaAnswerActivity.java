@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class QnaActivity extends AppCompatActivity {
+public class QnaAnswerActivity extends AppCompatActivity {
 
-    private static final String TAG = QnaActivity.class.getSimpleName();
+    private static final String TAG = QnaAnswerActivity.class.getSimpleName();
 
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
@@ -33,7 +33,7 @@ public class QnaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qna);
+        setContentView(R.layout.activity_qna_answer);
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(R.string.title_qna);
@@ -46,7 +46,7 @@ public class QnaActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_qna_answer, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -111,7 +111,7 @@ public class QnaActivity extends AppCompatActivity {
         if (mQnAIndex == mQnAList.size()) {
             mIsFinished = true;
 
-            AlertDialog alertDialog = new AlertDialog.Builder(QnaActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(QnaAnswerActivity.this).create();
             alertDialog.setTitle("Finished!");
 
             // get passing

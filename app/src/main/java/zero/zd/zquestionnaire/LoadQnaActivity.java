@@ -67,6 +67,6 @@ public class LoadQnaActivity extends AppCompatActivity {
 
     public void onClickLoad(View view) {
         Toast.makeText(LoadQnaActivity.this, mSelectedName, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, QnaActivity.class));
+        startActivity(new Intent(this, QnaAnswerActivity.class));
     }
 }
