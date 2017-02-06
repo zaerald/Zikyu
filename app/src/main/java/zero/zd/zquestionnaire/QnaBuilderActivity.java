@@ -50,5 +50,4 @@ public class QnaBuilderActivity extends AppCompatActivity {
         // @TODO add action to add QnA
         Toast.makeText(QnaBuilderActivity.this, "ADD!!!", Toast.LENGTH_SHORT).show();
     }
-
 }
