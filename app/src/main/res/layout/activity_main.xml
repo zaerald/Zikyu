@@ -12,7 +12,7 @@
     tools:context="zero.zd.zquestionnaire.MainActivity">
 
     <Button
-        android:text="Answer QnA"
+        android:text="@string/action_answer_qna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_answer"
@@ -22,7 +22,7 @@
         android:onClick="onClickAnswer"/>
 
     <Button
-        android:text="QNA Builder"
+        android:text="@string/action_qna_builder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_answer"
