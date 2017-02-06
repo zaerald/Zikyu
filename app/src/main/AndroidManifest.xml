@@ -13,13 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity android:name=".MainActivity">
 
         </activity>
         <activity android:name=".QnaAnswerActivity"/>s
         <activity android:name=".LoadQnaActivity"/>
 
+        <activity android:name=".QnaBuilderActivity">
+            
+        </activity>
     </application>
 
 </manifest>
