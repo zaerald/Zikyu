@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">ZQuestionnaire</string>
 
+    <!--START: Main Activity-->
+    <string name="action_answer_qna">Answer QNA</string>
+    <string name="action_qna_builder">QNA Builder</string>
 
     <!--START: QnA Activity-->
-    <string name="title_qna">Question And Answer</string>
+    <string name="title_qna">Question and Answer</string>
     <string name="msg_progress">Question %1$d/%2$d | C:%3$d M:%4$d</string>
     <string name="msg_correct">Correct!</string>
     <string name="msg_mistake">Mistake!</string>
