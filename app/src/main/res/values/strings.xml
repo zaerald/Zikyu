@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">ZQuestionnaire</string>
 
-    <!--START: Main Activity-->
+    <!--START: MainActivity-->
     <string name="action_answer_qna">Answer QNA</string>
     <string name="action_qna_builder">QNA Builder</string>
 
-    <!--START: QnA Activity-->
+    <!--START: QnaAnswerActivity-->
     <string name="title_qna">Question and Answer</string>
     <string name="msg_progress">Question %1$d/%2$d | C:%3$d M:%4$d</string>
     <string name="msg_correct">Correct!</string>
@@ -15,6 +15,15 @@
     <string name="action_overflow">Overflow</string>
     <string name="action_reset">Reset QnA</string>
     <string name="action_quit">Quit</string>
+
+    <!--START: QnaBuilderActivity-->
+    <string name="msg_question">Question</string>
+    <string name="msg_enter_question">Enter your question here.</string>
+    <string name="msg_answer">Answer</string>
+    <string name="msg_enter_answer">Enter your answer here.</string>
+    <string name="action_add">Add</string>
+
+    <string name="action_save_qna">Save QnA</string>
 
     <!-- START: Load Activity-->
     <string name="title_load">Load QnA</string>
