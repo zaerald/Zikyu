@@ -26,7 +26,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mQnAIndex;
     private int mAnswerLocationIndex;
 
-    boolean mIsFinished;
+    private boolean mIsFinished;
     private int mCorrect;
     private int mMistake;
 

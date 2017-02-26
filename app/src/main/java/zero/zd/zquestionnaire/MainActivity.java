@@ -1,6 +1,7 @@
 package zero.zd.zquestionnaire;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // create a folder
-        File folder = new File("/sdcard/ZQuestionnaire/");
+        File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZQuestionnaire/");
         if (!folder.exists()) folder.mkdirs();
     }
 

@@ -5,7 +5,7 @@ package zero.zd.zquestionnaire;
  * methods for accessing questions and asnwers
  */
 
-public class QnA {
+class QnA {
 
     private String question;
     private String answer;

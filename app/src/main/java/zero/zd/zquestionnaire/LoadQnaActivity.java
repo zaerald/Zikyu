@@ -1,8 +1,9 @@
 package zero.zd.zquestionnaire;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadQnaActivity extends AppCompatActivity {
+
+    private static final String TAG = LoadQnaActivity.class.getSimpleName();
 
     private List<String> mQnaFileList;
     private String mSelectedName;
@@ -29,7 +32,7 @@ public class LoadQnaActivity extends AppCompatActivity {
 
         mQnaFileList = new ArrayList<>();
 
-        File folder = new File("/sdcard/ZQuestionnaire/");
+        File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZQuestionnaire/");
         File files[] = folder.listFiles();
 
         if (files.length != 0) {
