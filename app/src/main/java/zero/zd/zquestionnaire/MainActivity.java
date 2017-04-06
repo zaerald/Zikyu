@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickAnswer(View view) {
-        startActivity(new Intent(this, LoadQnaActivity.class));
+        startActivity(LoadQnaActivity.getStartIntent(MainActivity.this));
     }
 
     public void onClickBuilder(View view) {
-        startActivity(new Intent(this, QnaBuilderActivity.class));
+        startActivity(QnaBuilderActivity.getStartIntent(MainActivity.this));
     }
 
 }

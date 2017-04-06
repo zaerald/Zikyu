@@ -1,5 +1,6 @@
 package zero.zd.zquestionnaire;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +22,10 @@ public class LoadQnaActivity extends AppCompatActivity {
 
     private List<String> mQnaFileList;
     private String mSelectedName;
+
+    public static Intent getStartIntent(Context context) {
+        return new Intent(context, LoadQnaActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,6 @@ public class LoadQnaActivity extends AppCompatActivity {
 
     public void onClickLoad(View view) {
         Toast.makeText(LoadQnaActivity.this, mSelectedName, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, QnaAnswerActivity.class));
+        startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
     }
 }

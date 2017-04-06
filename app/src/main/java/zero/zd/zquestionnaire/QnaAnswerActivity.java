@@ -1,5 +1,6 @@
 package zero.zd.zquestionnaire;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private boolean mIsFinished;
     private int mCorrect;
     private int mMistake;
+
+    public static Intent getStartIntent(Context context) {
+        return new Intent(context, QnaAnswerActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +75,21 @@ public class QnaAnswerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickButtonOne(View view) { buttonClick(0); }
+    public void onClickButtonOne(View view) {
+        buttonClick(0);
+    }
 
-    public void onClickButtonTwo(View view) { buttonClick(1); }
+    public void onClickButtonTwo(View view) {
+        buttonClick(1);
+    }
 
-    public void onClickButtonThree(View view) { buttonClick(2); }
+    public void onClickButtonThree(View view) {
+        buttonClick(2);
+    }
 
-    public void onClickButtonFour(View view) { buttonClick(3); }
+    public void onClickButtonFour(View view) {
+        buttonClick(3);
+    }
 
     /**
      * Method used to initialize/populate QnA data into QnAList
@@ -89,8 +102,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     /**
      * Methods for 4 answer buttons to execute same process
-     * @param num
-     *      the index/position of the button clicked.
+     *
+     * @param num the index/position of the button clicked.
      */
     private void buttonClick(int num) {
 
@@ -192,13 +205,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * if the index already exists on the generated index on array
      * {@code randIndices} for 3 invalid answers
      *
-     * @param arr the array of 3 index of invalid answers to check
+     * @param arr    the array of 3 index of invalid answers to check
      * @param target the newly generated index to compare to {@code arr}
-     * @return
-     *      {@code true} if the array randIndices already contains the
-     *          newly generated index of answer
-     *      {@code false} no same index or answer already existed at {@code randIndices}
-     *
+     * @return {@code true} if the array randIndices already contains the
+     * newly generated index of answer
+     * {@code false} no same index or answer already existed at {@code randIndices}
      * @see #getRandomIndex()
      */
     private boolean isRandomIndexExists(int[] arr, int target) {

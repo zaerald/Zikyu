@@ -1,13 +1,19 @@
 package zero.zd.zquestionnaire;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 public class QnaBuilderActivity extends AppCompatActivity {
+
+    public static Intent getStartIntent(Context context) {
+        return new Intent(context, QnaBuilderActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +22,6 @@ public class QnaBuilderActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override
