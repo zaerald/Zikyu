@@ -7,29 +7,29 @@ package zero.zd.zquestionnaire;
 
 class QnA {
 
-    private String question;
-    private String answer;
+    private String mQuestion;
+    private String mAnswer;
 
     public QnA(String question, String answer) {
         question = question.substring(0, 1).toUpperCase() + question.substring(1);
-        this.question = question;
-        this.answer = answer;
+        this.mQuestion = question;
+        this.mAnswer = answer;
     }
 
     public String getQuestion() {
-        return question;
+        return mQuestion;
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.mQuestion = question;
     }
 
     public String getAnswer() {
-        return answer;
+        return mAnswer;
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer;
+        this.mAnswer = answer;
     }
 
     @Override

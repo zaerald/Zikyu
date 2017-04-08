@@ -23,6 +23,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
 
+    private static final int BUTTON_ONE = 0;
+    private static final int BUTTON_TWO = 1;
+    private static final int BUTTON_THREE = 2;
+    private static final int BUTTON_FOUR = 3;
+
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
@@ -76,19 +81,19 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     public void onClickButtonOne(View view) {
-        buttonClick(0);
+        buttonClick(BUTTON_ONE);
     }
 
     public void onClickButtonTwo(View view) {
-        buttonClick(1);
+        buttonClick(BUTTON_TWO);
     }
 
     public void onClickButtonThree(View view) {
-        buttonClick(2);
+        buttonClick(BUTTON_THREE);
     }
 
     public void onClickButtonFour(View view) {
-        buttonClick(3);
+        buttonClick(BUTTON_FOUR);
     }
 
     /**

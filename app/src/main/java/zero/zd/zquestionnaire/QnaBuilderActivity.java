@@ -35,6 +35,7 @@ public class QnaBuilderActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_save:
+                // @TODO add action to write to a file
                 break;
 
             case android.R.id.home:
@@ -45,6 +46,7 @@ public class QnaBuilderActivity extends AppCompatActivity {
     }
 
     public void onClickAdd(View view) {
+        // @TODO add action to add QnA
         Toast.makeText(QnaBuilderActivity.this, "ADD!!!", Toast.LENGTH_SHORT).show();
     }
 
