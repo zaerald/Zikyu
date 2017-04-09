@@ -20,9 +20,7 @@ public class MainActivity extends AppCompatActivity {
         // create a folder
         File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZQuestionnaire/");
         if (!folder.exists()) {
-            if (!folder.mkdirs()) {
-                Log.e(TAG, "Failed on creating folders.");
-            }
+            if (!folder.mkdirs()) Log.e(TAG, "Failed on creating folders.");
         }
     }
 
