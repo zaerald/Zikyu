@@ -12,7 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,22 +83,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickButtonOne(View view) {
-        buttonClick(BUTTON_ONE);
-    }
-
-    public void onClickButtonTwo(View view) {
-        buttonClick(BUTTON_TWO);
-    }
-
-    public void onClickButtonThree(View view) {
-        buttonClick(BUTTON_THREE);
-    }
-
-    public void onClickButtonFour(View view) {
-        buttonClick(BUTTON_FOUR);
-    }
-
     /**
      * Method used to initialize/populate QnA data into QnAList
      */
@@ -106,15 +93,17 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     /**
-     * Methods for 4 answer buttons to execute same process
-     *
-     * @param num the index/position of the button clicked.
+     * Methods for to check if answer is correct,
+     * and update QnA
      */
-    private void buttonClick(int num) {
+    public void onClickOk(View view) {
 
-        View view = findViewById(R.id.activity_main);
+        // get radio location
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        int selectedRadioButton = radioGroup.indexOfChild(radioGroup
+                .findViewById(radioGroup.getCheckedRadioButtonId()));
 
-        if (num != mAnswerLocationIndex) {
+        if (selectedRadioButton != mAnswerLocationIndex) {
             if (mIsFinished)
                 return;
             String out = "Mistake!\nCorrect Answer: " + mQnAList.get(mQnAIndex).getAnswer();
@@ -179,24 +168,24 @@ public class QnaAnswerActivity extends AppCompatActivity {
         Random random = new Random();
         mAnswerLocationIndex = random.nextInt(4);
 
-        Button btnOne = (Button) findViewById(R.id.button_one);
-        Button btnTwo = (Button) findViewById(R.id.button_two);
-        Button btnThree = (Button) findViewById(R.id.button_three);
-        Button btnFour = (Button) findViewById(R.id.button_four);
+        RadioButton btnOne = (RadioButton) findViewById(R.id.radio_one);
+        RadioButton btnTwo = (RadioButton) findViewById(R.id.radio_two);
+        RadioButton btnThree = (RadioButton) findViewById(R.id.radio_three);
+        RadioButton btnFour = (RadioButton) findViewById(R.id.radio_four);
 
-        ArrayList<Button> btnList = new ArrayList<>();
-        btnList.add(btnOne);
-        btnList.add(btnTwo);
-        btnList.add(btnThree);
-        btnList.add(btnFour);
+        ArrayList<RadioButton> radioList = new ArrayList<>();
+        radioList.add(btnOne);
+        radioList.add(btnTwo);
+        radioList.add(btnThree);
+        radioList.add(btnFour);
 
 //        Log.i(TAG, "AnswerLoc: " + mAnswerLocationIndex);
-        btnList.get(mAnswerLocationIndex).setText(mQnAList.get(mQnAIndex).getAnswer());
+        radioList.get(mAnswerLocationIndex).setText(mQnAList.get(mQnAIndex).getAnswer());
         int randIndex = 0;
         for (int i = 0; i < 4; i++) {
             if (i == mAnswerLocationIndex)
                 continue;
-            btnList.get(i).setText(mQnAList.get(randIndices[randIndex]).getAnswer());
+            radioList.get(i).setText(mQnAList.get(randIndices[randIndex]).getAnswer());
             randIndex++;
         }
 

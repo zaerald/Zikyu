@@ -19,53 +19,68 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_weight=".01"
+        android:gravity="end"
         android:textAlignment="viewEnd"
-        android:gravity="end"/>
+        tools:text="Progress"/>
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight=".54">
+        android:layout_weight=".74">
 
         <TextView
             android:id="@+id/text_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            tools:text="Question"/>
     </ScrollView>
 
-    <Button
-        android:id="@+id/button_one"
+    <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".1"
-        android:onClick="onClickButtonOne"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        />
+        android:layout_height="wrap_content"
+        android:layout_weight=".2"
+        android:checkedButton="@+id/radio_one">
+
+        <RadioButton
+            android:id="@+id/radio_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="RadioButton 1"/>
+
+        <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="RadioButton 2"/>
+
+        <RadioButton
+            android:id="@+id/radio_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="RadioButton 3"/>
+
+        <RadioButton
+            android:id="@+id/radio_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="RadioButton 4"/>
+
+    </RadioGroup>
 
     <Button
-        android:id="@+id/button_two"
+        android:id="@+id/btn_ok"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".1"
-        android:onClick="onClickButtonTwo"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:layout_height="wrap_content"
+        android:layout_weight=".05"
+        android:onClick="onClickOk"
+        android:text="@string/action_check_answer"/>
 
-    <Button
-        android:id="@+id/button_three"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".1"
-        android:onClick="onClickButtonThree"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-    <Button
-        android:id="@+id/button_four"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".1"
-        android:onClick="onClickButtonFour"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 </LinearLayout>
