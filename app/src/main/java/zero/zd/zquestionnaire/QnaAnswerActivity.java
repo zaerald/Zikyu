@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -48,8 +49,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_answer);
 
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(R.string.title_qna);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_qna);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         populateQnA();
         mQnAIndex = 0;
@@ -67,6 +71,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
+            case android.R.id.home:
+                finish();
+                break;
 
             case R.id.action_reset:
                 resetQnA();
