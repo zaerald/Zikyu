@@ -105,10 +105,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
-            if (mIsFinished)
+            showMistakeDialog();
+            if (mIsFinished) {
                 return;
-            String out = "Mistake!\nCorrect Answer: " + mQnAList.get(mQnAIndex).getAnswer();
-            Snackbar.make(view, out, Snackbar.LENGTH_SHORT).show();
+            }
             mMistake++;
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
@@ -246,6 +246,20 @@ public class QnaAnswerActivity extends AppCompatActivity {
         if (!mIsFinished)
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void showMistakeDialog() {
+        String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+        new AlertDialog.Builder(QnaAnswerActivity.this)
+                .setTitle("Mistake!")
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
 }
