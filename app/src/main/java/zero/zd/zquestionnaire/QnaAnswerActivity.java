@@ -12,11 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +24,6 @@ import java.util.Random;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
-
-    private static final int BUTTON_ONE = 0;
-    private static final int BUTTON_TWO = 1;
-    private static final int BUTTON_THREE = 2;
-    private static final int BUTTON_FOUR = 3;
 
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
