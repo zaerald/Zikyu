@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mCorrect;
     private int mMistake;
 
+    RadioGroup mRadioGroup;
+
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
     }
@@ -47,6 +50,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.title_qna);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
 
         populateQnA();
         mQnAIndex = 0;
@@ -100,9 +105,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
     public void onClickOk(View view) {
 
         // get radio location
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedRadioButton = radioGroup.indexOfChild(radioGroup
-                .findViewById(radioGroup.getCheckedRadioButtonId()));
+        int selectedRadioButton = mRadioGroup.indexOfChild(mRadioGroup
+                .findViewById(mRadioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
             showMistakeDialog();
@@ -111,7 +115,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
             }
             mMistake++;
         } else {
-            Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(QnaAnswerActivity.this,
+                    R.string.msg_correct, Toast.LENGTH_SHORT).show();
             mCorrect++;
         }
 
@@ -173,6 +178,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         RadioButton btnTwo = (RadioButton) findViewById(R.id.radio_two);
         RadioButton btnThree = (RadioButton) findViewById(R.id.radio_three);
         RadioButton btnFour = (RadioButton) findViewById(R.id.radio_four);
+        mRadioGroup.check(R.id.radio_one);
 
         ArrayList<RadioButton> radioList = new ArrayList<>();
         radioList.add(btnOne);
