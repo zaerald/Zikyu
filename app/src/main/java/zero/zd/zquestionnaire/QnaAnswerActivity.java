@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -33,8 +35,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private boolean mIsFinished;
     private int mCorrect;
     private int mMistake;
+    private boolean isInitialized;
 
     RadioGroup mRadioGroup;
+    Button mOkButton;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
@@ -51,7 +55,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        mOkButton = (Button) findViewById(R.id.btn_ok);
         mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (isInitialized)
+                    mOkButton.setEnabled(true);
+            }
+        });
 
         populateQnA();
         mQnAIndex = 0;
@@ -146,6 +158,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
 
         if (!mIsFinished) initQnA();
+        mOkButton.setEnabled(false);
     }
 
     /**
@@ -176,7 +189,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         RadioButton btnTwo = (RadioButton) findViewById(R.id.radio_two);
         RadioButton btnThree = (RadioButton) findViewById(R.id.radio_three);
         RadioButton btnFour = (RadioButton) findViewById(R.id.radio_four);
-        mRadioGroup.check(R.id.radio_one);
 
         ArrayList<RadioButton> radioList = new ArrayList<>();
         radioList.add(btnOne);
@@ -197,6 +209,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
         TextView txtProgress = (TextView) findViewById(R.id.text_progress);
         txtProgress.setText(String.format(getResources().getString(R.string.msg_progress),
                 mQnAIndex + 1, mQnAList.size(), mCorrect, mMistake));
+        mRadioGroup.clearCheck();
+        isInitialized = true;
     }
 
     /**
