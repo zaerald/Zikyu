@@ -110,9 +110,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         if (selectedRadioButton != mAnswerLocationIndex) {
             showMistakeDialog();
-            if (mIsFinished) {
-                return;
-            }
+            if (mIsFinished) return;
             mMistake++;
         } else {
             Toast.makeText(QnaAnswerActivity.this,
