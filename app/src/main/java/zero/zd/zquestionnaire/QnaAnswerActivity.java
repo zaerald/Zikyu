@@ -94,7 +94,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
      */
     private void populateQnA() {
         mQnAList = new ArrayList<>();
-        mQnAList = QnAHelper.getSoftEngQnA();
+        mQnAList = QnAHelper.getBasicQnA();
         Collections.shuffle(mQnAList);
     }
 
