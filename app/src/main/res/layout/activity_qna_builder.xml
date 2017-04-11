@@ -1,69 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <LinearLayout
-=======
-<RelativeLayout
->>>>>>> add qnabuilderactivity files
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_qna_builder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-<<<<<<< HEAD
-    tools:context="zero.zd.zquestionnaire.QnaBuilderActivity"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <TextView
-        android:text="@string/msg_question"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/text_question"
-        android:layout_weight=".05"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/edit_question"
-        android:hint="@string/msg_enter_question"
-        android:layout_weight=".7"
-        android:gravity="top"/>
-
-    <TextView
-        android:text="@string/msg_answer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/text_answer"
-        android:layout_weight=".05"
-        android:layout_marginTop="20dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/edit_answer"
-        android:hint="@string/msg_enter_answer"
-        android:layout_weight=".1"/>
-
-    <Button
-        android:text="@string/action_add"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/button_add"
-        android:layout_weight=".1"
-        android:layout_marginTop="20dp"
-        android:onClick="onClickAdd"/>
-
-</LinearLayout>
-=======
+    android:weightSum="1"
     tools:context="zero.zd.zquestionnaire.QnaBuilderActivity">
 
-</RelativeLayout>
->>>>>>> add qnabuilderactivity files
+    <TextView
+        android:id="@+id/text_question"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".05"
+        android:text="@string/msg_question"/>
+
+    <EditText
+        android:id="@+id/edit_question"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/msg_enter_question"
+        android:inputType="textMultiLine"/>
+
+    <TextView
+        android:id="@+id/text_answer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight=".05"
+        android:text="@string/msg_answer"/>
+
+    <EditText
+        android:id="@+id/edit_answer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".1"
+        android:ems="10"
+        android:hint="@string/msg_enter_answer"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight=".1"
+        android:onClick="onClickAdd"
+        android:text="@string/action_add"/>
+
+</LinearLayout>
