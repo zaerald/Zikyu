@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +35,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mCorrect;
     private int mMistake;
     private boolean isInitialized;
-
+    
     RadioGroup mRadioGroup;
     Button mOkButton;
 
@@ -117,16 +116,16 @@ public class QnaAnswerActivity extends AppCompatActivity {
     public void onClickOk(View view) {
 
         // get radio location
-        int selectedRadioButton = mRadioGroup.indexOfChild(mRadioGroup
-                .findViewById(mRadioGroup.getCheckedRadioButtonId()));
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        int selectedRadioButton = radioGroup.indexOfChild(radioGroup
+                .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
             showMistakeDialog();
             if (mIsFinished) return;
             mMistake++;
         } else {
-            Toast.makeText(QnaAnswerActivity.this,
-                    R.string.msg_correct, Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
         }
 
