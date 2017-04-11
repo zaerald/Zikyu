@@ -13,13 +13,11 @@
 
             <item
                 android:id="@+id/action_reset"
-                android:icon="@drawable/menu_action_reset"
                 android:title="@string/action_reset"
                 app:showAsAction="ifRoom|withText"/>
 
             <item
                 android:id="@+id/action_quit"
-                android:icon="@drawable/menu_action_exit"
                 android:title="@string/action_quit"
                 app:showAsAction="ifRoom|withText"/>
         </menu>
