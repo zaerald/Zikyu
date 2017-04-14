@@ -8,6 +8,7 @@ public class QnaState {
     private static final QnaState sQnaStateInstance = new QnaState();
 
     private ArrayList<QnA> mQnAList;
+    private ArrayList<QnA> mMistakeQnaList;
 
 
     public static QnaState getInstance() {
@@ -22,5 +23,13 @@ public class QnaState {
 
     public void setQnAList(ArrayList<QnA> qnAList) {
         mQnAList = qnAList;
+    }
+
+    public ArrayList<QnA> getMistakeQnaList() {
+        return mMistakeQnaList;
+    }
+
+    public void setMistakeQnaList(ArrayList<QnA> mistakeQnaList) {
+        mMistakeQnaList = mistakeQnaList;
     }
 }

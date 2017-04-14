@@ -39,6 +39,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     TextView mTextQuestion;
 
     private ArrayList<QnA> mQnAList;
+    private ArrayList<QnA> mMistakeQnaList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
     private int mCorrect;
@@ -75,6 +76,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mQnAList = new ArrayList<>();
             mQnAList = QnaState.getInstance().getQnAList();
+            mMistakeQnaList = new ArrayList<>();
+            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+
             mQnAIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
             mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
@@ -93,6 +97,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
         outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
         outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
@@ -155,6 +161,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * Method used to initialize/populate QnA data into QnAList
      */
     private void populateQnA() {
+        mMistakeQnaList = new ArrayList<>();
         mQnAList = new ArrayList<>();
         mQnAList = QnAHelper.getBasicQnA();
         Collections.shuffle(mQnAList);
