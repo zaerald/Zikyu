@@ -118,17 +118,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         mQnAIndex++;
         if (mQnAIndex == mQnAList.size()) {
-            startActivity(QnaResultActivity.getStartIntent(this, mCorrect, mMistake));
+            // get passing
+            String assessment = "Failed!";
+            int passingCorrectPoints = mQnAList.size() / 2;
+            if (mCorrect >= passingCorrectPoints)
+                assessment = "Passed!";
+
+            startActivity(QnaResultActivity
+                    .getStartIntent(this, assessment, mCorrect, mMistake));
             return;
-//            // get passing
-//            String assessment = "Failed!";
-//            int passingCorrectPoints = mQnAList.size() / 2;
-//            if (mCorrect >= passingCorrectPoints)
-//                assessment = "Passed!";
-//
-//            String msg = assessment + "\nYou got: " + mCorrect + "/"
-//                    + mQnAList.size() + ".";
-//            showAlertDialog("Finished", msg);
         }
 
         initQnA();

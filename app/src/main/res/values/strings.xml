@@ -31,4 +31,18 @@
     <string name="action_load_qna">Load QnA</string>
     <string name="msg_choose_file">Choose a file to load</string>
 
+    <!-- START: Result Activity -->
+    <plurals name="msg_result_correct">
+        <item quantity="zero">You Got no correct answers</item>
+        <item quantity="one">Only one correct answer</item>
+        <item quantity="other">You got %1$d correct answers</item>
+    </plurals>
+    <plurals name="msg_result_mistake">
+        <item quantity="zero">and No Mistakes!</item>
+        <item quantity="one">and Only one mistake.</item>
+        <item quantity="other">and %1$d mistakes.</item>
+    </plurals>
+    <string name="action_answer_mistake">Answer Mistakes Only</string>
+    <string name="action_load_different_qna">Load Different QnA</string>
+
 </resources>
