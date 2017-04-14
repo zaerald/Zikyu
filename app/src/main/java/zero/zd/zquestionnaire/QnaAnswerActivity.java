@@ -114,23 +114,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
+            updateQna();
         }
-
-        mQnAIndex++;
-        if (mQnAIndex == mQnAList.size()) {
-            // get passing
-            String assessment = "Failed!";
-            int passingCorrectPoints = mQnAList.size() / 2;
-            if (mCorrect >= passingCorrectPoints)
-                assessment = "Passed!";
-
-            startActivity(QnaResultActivity
-                    .getStartIntent(this, assessment, mCorrect, mMistake));
-            return;
-        }
-
-        initQnA();
-        mOkButton.setEnabled(false);
     }
 
     /**
@@ -245,13 +230,33 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
     }
 
+    private void updateQna() {
+        mQnAIndex++;
+        if (mQnAIndex == mQnAList.size()) {
+            // get passing
+            String assessment = "Failed!";
+            int passingCorrectPoints = mQnAList.size() / 2;
+            if (mCorrect >= passingCorrectPoints)
+                assessment = "Passed!";
+
+            startActivity(QnaResultActivity
+                    .getStartIntent(this, assessment, mCorrect, mMistake));
+            return;
+        }
+
+        initQnA();
+        mOkButton.setEnabled(false);
+    }
+
     private void showAlertDialog(String title, String msg) {
         new AlertDialog.Builder(QnaAnswerActivity.this)
                 .setTitle(title)
                 .setMessage(msg)
+                .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        updateQna();
                         dialog.dismiss();
                     }
                 })
