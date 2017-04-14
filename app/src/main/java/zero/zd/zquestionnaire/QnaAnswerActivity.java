@@ -101,15 +101,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     /**
-     * Method used to initialize/populate QnA data into QnAList
-     */
-    private void populateQnA() {
-        mQnAList = new ArrayList<>();
-        mQnAList = QnAHelper.getBasicQnA();
-        Collections.shuffle(mQnAList);
-    }
-
-    /**
      * Methods for to check if answer is correct,
      * and update QnA
      */
@@ -158,6 +149,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         if (!mIsFinished) initQnA();
         mOkButton.setEnabled(false);
+    }
+
+    /**
+     * Method used to initialize/populate QnA data into QnAList
+     */
+    private void populateQnA() {
+        mQnAList = new ArrayList<>();
+        mQnAList = QnAHelper.getBasicQnA();
+        Collections.shuffle(mQnAList);
     }
 
     /**
