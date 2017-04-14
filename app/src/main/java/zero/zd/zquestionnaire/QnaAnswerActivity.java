@@ -26,18 +26,14 @@ import java.util.Random;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
-
+    RadioGroup mRadioGroup;
+    Button mOkButton;
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
-
-    private boolean mIsFinished;
     private int mCorrect;
     private int mMistake;
     private boolean isInitialized;
-    
-    RadioGroup mRadioGroup;
-    Button mOkButton;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
@@ -112,43 +108,14 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
-            showMistakeDialog();
-            if (mIsFinished) return;
+            String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+            showAlertDialog("Mistake!", msg);
             mMistake++;
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
+            updateQna();
         }
-
-        mQnAIndex++;
-        if (mQnAIndex == mQnAList.size()) {
-            mIsFinished = true;
-
-            AlertDialog alertDialog = new AlertDialog.Builder(QnaAnswerActivity.this).create();
-            alertDialog.setTitle("Finished!");
-
-            // get passing
-            String assessment = "Failed!";
-            int passingCorrectPoints = mQnAList.size() / 2;
-            if (mCorrect >= passingCorrectPoints)
-                assessment = "Passed!";
-
-            alertDialog.setMessage(assessment + "\nYou got: " + mCorrect + "/"
-                    + mQnAList.size() + ".");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-
-            resetQnA();
-        }
-
-        if (!mIsFinished) initQnA();
-        mOkButton.setEnabled(false);
     }
 
     /**
@@ -252,7 +219,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * Resets the states of the variables, for resetting QnA
      */
     private void resetQnA() {
-        mIsFinished = false;
         mQnAIndex = 0;
         mCorrect = 0;
         mMistake = 0;
@@ -260,19 +226,37 @@ public class QnaAnswerActivity extends AppCompatActivity {
         populateQnA();
         initQnA();
 
-        if (!mIsFinished)
-            Snackbar.make(getWindow().getDecorView().getRootView(),
-                    R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),
+                R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void showMistakeDialog() {
-        String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+    private void updateQna() {
+        mQnAIndex++;
+        if (mQnAIndex == mQnAList.size()) {
+            // get passing
+            String assessment = "Failed!";
+            int passingCorrectPoints = mQnAList.size() / 2;
+            if (mCorrect >= passingCorrectPoints)
+                assessment = "Passed!";
+
+            startActivity(QnaResultActivity
+                    .getStartIntent(this, assessment, mCorrect, mMistake));
+            return;
+        }
+
+        initQnA();
+        mOkButton.setEnabled(false);
+    }
+
+    private void showAlertDialog(String title, String msg) {
         new AlertDialog.Builder(QnaAnswerActivity.this)
-                .setTitle("Mistake!")
+                .setTitle(title)
                 .setMessage(msg)
+                .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        updateQna();
                         dialog.dismiss();
                     }
                 })
