@@ -118,7 +118,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         mQnAIndex++;
         if (mQnAIndex == mQnAList.size()) {
-            startActivity(QnaResultActivity.getStartIntent(this));
+            startActivity(QnaResultActivity.getStartIntent(this, mCorrect, mMistake));
             return;
 //            // get passing
 //            String assessment = "Failed!";
