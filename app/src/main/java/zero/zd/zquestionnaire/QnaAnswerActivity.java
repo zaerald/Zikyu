@@ -114,7 +114,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         if (selectedRadioButton != mAnswerLocationIndex) {
             String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
             showAlertDialog("Mistake!", msg);
-            if (mIsFinished) return;
+//            if (mIsFinished) return;
             mMistake++;
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
