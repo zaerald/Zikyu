@@ -112,7 +112,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
-            showMistakeDialog();
+            String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+            showAlertDialog("Mistake!", msg);
             if (mIsFinished) return;
             mMistake++;
         } else {
@@ -124,25 +125,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
         if (mQnAIndex == mQnAList.size()) {
             mIsFinished = true;
 
-            AlertDialog alertDialog = new AlertDialog.Builder(QnaAnswerActivity.this).create();
-            alertDialog.setTitle("Finished!");
-
             // get passing
             String assessment = "Failed!";
             int passingCorrectPoints = mQnAList.size() / 2;
             if (mCorrect >= passingCorrectPoints)
                 assessment = "Passed!";
 
-            alertDialog.setMessage(assessment + "\nYou got: " + mCorrect + "/"
-                    + mQnAList.size() + ".");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+            String msg = assessment + "\nYou got: " + mCorrect + "/"
+                    + mQnAList.size() + ".";
+            showAlertDialog("Finished", msg);
 
             resetQnA();
         }
@@ -265,10 +256,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
                     R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void showMistakeDialog() {
-        String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+    private void showAlertDialog(String title, String msg) {
         new AlertDialog.Builder(QnaAnswerActivity.this)
-                .setTitle("Mistake!")
+                .setTitle(title)
                 .setMessage(msg)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
