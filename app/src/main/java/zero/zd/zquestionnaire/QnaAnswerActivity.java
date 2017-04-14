@@ -26,18 +26,14 @@ import java.util.Random;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
-
+    RadioGroup mRadioGroup;
+    Button mOkButton;
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
-
-    private boolean mIsFinished;
     private int mCorrect;
     private int mMistake;
     private boolean isInitialized;
-    
-    RadioGroup mRadioGroup;
-    Button mOkButton;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
@@ -114,7 +110,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         if (selectedRadioButton != mAnswerLocationIndex) {
             String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
             showAlertDialog("Mistake!", msg);
-//            if (mIsFinished) return;
             mMistake++;
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
@@ -123,22 +118,20 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         mQnAIndex++;
         if (mQnAIndex == mQnAList.size()) {
-            mIsFinished = true;
-
-            // get passing
-            String assessment = "Failed!";
-            int passingCorrectPoints = mQnAList.size() / 2;
-            if (mCorrect >= passingCorrectPoints)
-                assessment = "Passed!";
-
-            String msg = assessment + "\nYou got: " + mCorrect + "/"
-                    + mQnAList.size() + ".";
-            showAlertDialog("Finished", msg);
-
-            resetQnA();
+            startActivity(QnaResultActivity.getStartIntent(this));
+            return;
+//            // get passing
+//            String assessment = "Failed!";
+//            int passingCorrectPoints = mQnAList.size() / 2;
+//            if (mCorrect >= passingCorrectPoints)
+//                assessment = "Passed!";
+//
+//            String msg = assessment + "\nYou got: " + mCorrect + "/"
+//                    + mQnAList.size() + ".";
+//            showAlertDialog("Finished", msg);
         }
 
-        if (!mIsFinished) initQnA();
+        initQnA();
         mOkButton.setEnabled(false);
     }
 
@@ -243,7 +236,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * Resets the states of the variables, for resetting QnA
      */
     private void resetQnA() {
-        mIsFinished = false;
         mQnAIndex = 0;
         mCorrect = 0;
         mMistake = 0;
@@ -251,9 +243,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
         populateQnA();
         initQnA();
 
-        if (!mIsFinished)
-            Snackbar.make(getWindow().getDecorView().getRootView(),
-                    R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),
+                R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
     }
 
     private void showAlertDialog(String title, String msg) {
