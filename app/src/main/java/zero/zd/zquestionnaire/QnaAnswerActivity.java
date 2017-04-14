@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 import zero.zd.zquestionnaire.model.QnA;
@@ -105,6 +104,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         // retrieve saved instances
         if (savedInstanceState != null) {
+            mQnAList = new ArrayList<>();
+            mQnAList = QnaState.getInstance().getQnAList();
             mMistakeQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
 
