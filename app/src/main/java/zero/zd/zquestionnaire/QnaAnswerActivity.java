@@ -97,7 +97,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
         outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
@@ -148,6 +147,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
+            // add QnA to mistake list
+            mMistakeQnaList.add(mQnAList.get(mQnAIndex));
+
             showMistakeDialog();
             mMistake++;
         } else {
@@ -273,6 +275,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private void updateQna() {
         mQnAIndex++;
         if (mQnAIndex == mQnAList.size()) {
+            // update mistake list
+            QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
             // get passing
             String assessment = "Failed!";
             int passingCorrectPoints = mQnAList.size() / 2;
