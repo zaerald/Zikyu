@@ -26,8 +26,16 @@ import java.util.Random;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
+    private static final String SAVED_QNA_INDEX = "SAVED_QNA_INDEX";
+    private static final String SAVED_ANSWER_LOCATION_INDEX = "SAVED_ANSWER_LOCATION_INDEX";
+    private static final String SAVED_CORRECT_ANSWER = "SAVED_CORRECT_ANSWER";
+    private static final String SAVED_MISTAKE_ANSWER = "SAVED_MISTAKE_ANSWER";
+    private static final String SAVED_IS_INITIALIZED = "SAVED_IS_INITIALIZED";
+
     RadioGroup mRadioGroup;
     Button mOkButton;
+    TextView mTextQuestion;
+
     private ArrayList<QnA> mQnAList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
@@ -59,11 +67,35 @@ public class QnaAnswerActivity extends AppCompatActivity {
                     mOkButton.setEnabled(true);
             }
         });
+        mTextQuestion = (TextView) findViewById(R.id.text_question);
 
-        populateQnA();
-        mQnAIndex = 0;
+        // retrieve saved instances
+        if (savedInstanceState != null) {
+            mQnAList = new ArrayList<>();
+            mQnAList = QnaState.getInstance().getQnAList();
+            mQnAIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
+            mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
+            mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
+            mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
+            isInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
 
-        initQnA();
+            updateQuestionText();
+        } else {
+            populateQnA();
+            mQnAIndex = 0;
+
+            initQnA();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
+        outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
+        outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
+        outState.putInt(SAVED_MISTAKE_ANSWER, mMistake);
+        outState.putBoolean(SAVED_IS_INITIALIZED, isInitialized);
     }
 
     @Override
@@ -125,6 +157,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mQnAList = new ArrayList<>();
         mQnAList = QnAHelper.getBasicQnA();
         Collections.shuffle(mQnAList);
+        QnaState.getInstance().setQnAList(mQnAList);
     }
 
     /**
@@ -132,8 +165,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * updates GUI and will run on every increment of mQnAIndex
      */
     private void initQnA() {
-        TextView textQuestion = (TextView) findViewById(R.id.text_question);
-        textQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
+        updateQuestionText();
 
         int[] randIndices = new int[3];
         randIndices[0] = getRandomIndex();
@@ -246,6 +278,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         initQnA();
         mOkButton.setEnabled(false);
+    }
+
+    private void updateQuestionText() {
+        mTextQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
     }
 
     private void showAlertDialog(String title, String msg) {
