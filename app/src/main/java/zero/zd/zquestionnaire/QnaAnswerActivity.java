@@ -106,6 +106,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         // retrieve saved instances
         if (savedInstanceState != null) {
+            mQnAList = new ArrayList<>();
+            mQnAList = QnaState.getInstance().getQnAList();
             mMistakeQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
 
@@ -129,6 +131,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
         outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
