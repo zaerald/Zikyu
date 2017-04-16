@@ -45,14 +45,15 @@
         android:id="@+id/button_answer_mistakes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/action_answer_mistake"
-        android:layout_marginRight="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_load_different_qna"/>
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="onClickAnswerMistakes"
+        android:text="@string/action_answer_mistake"
+        app:layout_constraintBottom_toTopOf="@+id/button_load_different_qna"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/button_load_different_qna"
