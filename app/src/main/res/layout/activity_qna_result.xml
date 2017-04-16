@@ -29,15 +29,17 @@
         android:id="@+id/text_msg_result"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="23dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:text="Result Message"
-        app:layout_constraintHorizontal_bias="0.0"/>
+        tools:text="Result Message"/>
 
     <Button
         android:id="@+id/button"
