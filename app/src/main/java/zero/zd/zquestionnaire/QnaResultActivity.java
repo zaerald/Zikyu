@@ -52,8 +52,6 @@ public class QnaResultActivity extends AppCompatActivity {
     }
 
     public void onClickAnswerMistakes(View view) {
-        // set mistakeslist to qnalist
-        QnaState.getInstance().updateListFromMistakes();
-        startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this));
+        startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, true));
     }
 }
