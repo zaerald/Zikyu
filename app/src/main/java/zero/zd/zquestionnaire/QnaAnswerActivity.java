@@ -103,11 +103,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mQnAList = QnaState.getInstance().getQnAList();
         Log.d(TAG, "LOADED " + QnaState.getInstance().toString());
 
-
         // retrieve saved instances
         if (savedInstanceState != null) {
-            mQnAList = new ArrayList<>();
-            mQnAList = QnaState.getInstance().getQnAList();
             mMistakeQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
 
