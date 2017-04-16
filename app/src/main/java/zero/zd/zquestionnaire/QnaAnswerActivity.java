@@ -88,11 +88,21 @@ public class QnaAnswerActivity extends AppCompatActivity {
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
         if (isMistakesLoaded) {
-            QnaState.getInstance().updateListFromMistakes();
+            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+            mQnAList = new ArrayList<>(mMistakeQnaList);
+            QnaState.getInstance().setQnAList(mQnAList);
+            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+            mMistakeQnaList.clear();
+            Log.d(TAG, "Clean mistakeList");
+            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
+        Log.d(TAG, "LOAD");
         mQnAList = QnaState.getInstance().getQnAList();
+        Log.d(TAG, "LOADED " + QnaState.getInstance().toString());
+
 
         // retrieve saved instances
         if (savedInstanceState != null) {
