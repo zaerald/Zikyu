@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".QnaAnswerActivity"/>
+        <activity
+            android:name=".QnaAnswerActivity"
+            android:noHistory="true"/>
         <activity android:name=".QnaBuilderActivity"/>
         <activity android:name=".LoadQnaActivity"/>
         <activity
