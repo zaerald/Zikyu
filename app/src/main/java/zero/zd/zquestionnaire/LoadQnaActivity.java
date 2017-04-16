@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LoadQnaActivity extends AppCompatActivity {
@@ -63,6 +65,13 @@ public class LoadQnaActivity extends AppCompatActivity {
 
     public void onClickLoad(View view) {
         Toast.makeText(LoadQnaActivity.this, mSelectedName, Toast.LENGTH_SHORT).show();
+
+        // populate qna
+        ArrayList<QnA> qnaList = QnAHelper.getBasicQnA();
+        Collections.shuffle(qnaList);
+        QnaState.getInstance().setQnAList(qnaList);
+        Log.d(TAG, "QnA Populated");
+
         startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
     }
 }
