@@ -104,8 +104,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         // retrieve saved instances
         if (savedInstanceState != null) {
-            mQnAList = new ArrayList<>();
-            mQnAList = QnaState.getInstance().getQnAList();
             mMistakeQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
 
