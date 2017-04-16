@@ -28,6 +28,9 @@ import zero.zd.zquestionnaire.model.QnA;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
+
+    private static final String EXTRA_IS_MISTAKE_LOADED = "EXTRA_IS_MISTAKE_LOADED";
+
     private static final String SAVED_QNA_INDEX = "SAVED_QNA_INDEX";
     private static final String SAVED_ANSWER_LOCATION_INDEX = "SAVED_ANSWER_LOCATION_INDEX";
     private static final String SAVED_CORRECT_ANSWER = "SAVED_CORRECT_ANSWER";
@@ -48,6 +51,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
+    }
+
+    public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
+        Intent intent = new Intent(context, QnaAnswerActivity.class);
+        intent.putExtra(EXTRA_IS_MISTAKE_LOADED, isMistakesLoaded);
+        return intent;
     }
 
     @Override
@@ -72,10 +81,21 @@ public class QnaAnswerActivity extends AppCompatActivity {
         });
         mTextQuestion = (TextView) findViewById(R.id.text_question);
 
+        mQnAList = new ArrayList<>();
+        mMistakeQnaList = new ArrayList<>();
+
+        // check if mistake is loaded
+        boolean isMistakesLoaded = getIntent()
+                .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
+        if (isMistakesLoaded) {
+            QnaState.getInstance().updateListFromMistakes();
+            Log.d(TAG, "Mistakes Loaded!");
+        }
+        // set qna list
+        mQnAList = QnaState.getInstance().getQnAList();
+
         // retrieve saved instances
         if (savedInstanceState != null) {
-            mQnAList = new ArrayList<>();
-            mQnAList = QnaState.getInstance().getQnAList();
             mMistakeQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
 
@@ -86,11 +106,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
             isInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
 
             updateQuestionText();
+            Log.d(TAG, "Activity recreated.");
         } else {
-            populateQnA();
+            // @CHANGED: removed populate qna
             mQnAIndex = 0;
 
             initQnA();
+            Log.d(TAG, "Activity initialized.");
         }
     }
 
@@ -157,17 +179,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mCorrect++;
             updateQna();
         }
-    }
-
-    /**
-     * Method used to initialize/populate QnA data into QnAList
-     */
-    private void populateQnA() {
-        mMistakeQnaList = new ArrayList<>();
-        mQnAList = new ArrayList<>();
-        mQnAList = QnAHelper.getBasicQnA();
-        Collections.shuffle(mQnAList);
-        QnaState.getInstance().setQnAList(mQnAList);
     }
 
     /**
@@ -265,7 +276,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mCorrect = 0;
         mMistake = 0;
 
-        populateQnA();
         initQnA();
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
