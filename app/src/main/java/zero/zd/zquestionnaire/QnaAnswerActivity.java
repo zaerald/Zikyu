@@ -271,7 +271,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 assessment = "Passed!";
 
             startActivity(QnaResultActivity
-                    .getStartIntent(this, assessment, mCorrect, mMistake));
+                    .getStartIntent(this, assessment, mCorrect));
             return;
         }
 
