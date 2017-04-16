@@ -30,6 +30,7 @@ public class QnaResultActivity extends AppCompatActivity {
         // get values
         String assessment = getIntent().getStringExtra(EXTRA_ASSESSMENT);
         int correct = getIntent().getIntExtra(EXTRA_CORRECT, -1);
+        int qnaTotal = QnaState.getInstance().getQnAList().size();
         Log.d(TAG, "Correct: " + correct);
 
         // update assessment message
@@ -45,6 +46,6 @@ public class QnaResultActivity extends AppCompatActivity {
 
         // update result message
         TextView textResult = (TextView) findViewById(R.id.text_msg_result);
-        textResult.setText("");
+        textResult.setText(getResources().getString(R.string.msg_result, correct, qnaTotal));
     }
 }
