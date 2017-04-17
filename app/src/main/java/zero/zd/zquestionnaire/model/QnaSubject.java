@@ -2,12 +2,12 @@ package zero.zd.zquestionnaire.model;
 
 import java.util.ArrayList;
 
-public class QnASubject {
+public class QnaSubject {
 
     private String mSubjectName;
     private ArrayList<QnA> mQnaList;
 
-    public QnASubject(String subjectName, ArrayList<QnA> qnaList) {
+    public QnaSubject(String subjectName, ArrayList<QnA> qnaList) {
         mSubjectName = subjectName;
         mQnaList = qnaList;
     }

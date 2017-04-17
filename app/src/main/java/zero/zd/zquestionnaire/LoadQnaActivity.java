@@ -18,13 +18,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import zero.zd.zquestionnaire.model.QnASubject;
+import zero.zd.zquestionnaire.model.QnaSubject;
 
 public class LoadQnaActivity extends AppCompatActivity {
 
     private static final String TAG = LoadQnaActivity.class.getSimpleName();
 
-    private ArrayList<QnASubject> mSubjectList;
+    private ArrayList<QnaSubject> mSubjectList;
     private int mSelectedIndex;
 
 
@@ -41,9 +41,9 @@ public class LoadQnaActivity extends AppCompatActivity {
         }
 
         mSubjectList = new ArrayList<>();
-        mSubjectList.add(QnAHelper.getBasicQnA());
-        mSubjectList.add(QnAHelper.getBasicQnA());
-        mSubjectList.add(QnAHelper.getBasicQnA());
+        mSubjectList.add(QnaHelper.getBasicQnA());
+        mSubjectList.add(QnaHelper.getBasicQnA());
+        mSubjectList.add(QnaHelper.getBasicQnA());
 
         ListView list = (ListView) findViewById(R.id.list);
         ArrayAdapter adapter =
@@ -81,11 +81,11 @@ public class LoadQnaActivity extends AppCompatActivity {
     private class SubjectArrayAdapter extends ArrayAdapter {
         private Context mContext;
         private int mResource;
-        private ArrayList<QnASubject> mSubjectList;
+        private ArrayList<QnaSubject> mSubjectList;
 
 
         public SubjectArrayAdapter(
-                Context context, int resource, ArrayList<QnASubject> subjectList) {
+                Context context, int resource, ArrayList<QnaSubject> subjectList) {
             super(context, resource, subjectList);
             mContext = context;
             mResource = resource;
@@ -99,7 +99,7 @@ public class LoadQnaActivity extends AppCompatActivity {
 
         @Nullable
         @Override
-        public QnASubject getItem(int position) {
+        public QnaSubject getItem(int position) {
             return mSubjectList.get(position);
         }
 
@@ -121,7 +121,7 @@ public class LoadQnaActivity extends AppCompatActivity {
                 convertView.setTag(viewHolder);
             } else viewHolder = (ViewHolder) convertView.getTag();
 
-            QnASubject qnASubject = mSubjectList.get(position);
+            QnaSubject qnASubject = mSubjectList.get(position);
 
             viewHolder.subjectName.setText(qnASubject.getSubjectName());
             viewHolder.qnaCount.setText(getResources()
