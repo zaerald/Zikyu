@@ -37,13 +37,13 @@ public class QnaState {
         mMistakeQnaList = mistakeQnaList;
     }
 
-    @Override
-    public String toString() {
-        String out = "QNA LIST: \n";
-        for (QnA qna : mQnAList) {
-            out += qna.toString() + "\n";
-        }
-        out += "END";
-        return out;
-    }
+//    @Override
+//    public String toString() {
+//        String out = "QNA LIST: \n";
+//        for (QnA qna : mQnAList) {
+//            out += qna.toString() + "\n";
+//        }
+//        out += "END";
+//        return out;
+//    }
 }

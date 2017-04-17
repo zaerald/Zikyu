@@ -69,7 +69,8 @@ public class LoadQnaActivity extends AppCompatActivity {
     }
 
     public void onClickLoad(View view) {
-        Toast.makeText(LoadQnaActivity.this, mSelectedIndex, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoadQnaActivity.this, "Selected Index: "
+                + mSelectedIndex, Toast.LENGTH_SHORT).show();
         startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
     }
 
