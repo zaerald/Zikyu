@@ -3,6 +3,8 @@ package zero.zd.zquestionnaire;
 
 import java.util.ArrayList;
 
+import zero.zd.zquestionnaire.model.QnA;
+
 /**
  * Helper class for retrieving QnA for different topics.
  * for future feature: choosing diff topics instead of 1 topic

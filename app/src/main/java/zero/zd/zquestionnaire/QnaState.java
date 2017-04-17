@@ -2,6 +2,8 @@ package zero.zd.zquestionnaire;
 
 import java.util.ArrayList;
 
+import zero.zd.zquestionnaire.model.QnA;
+
 public class QnaState {
     private static final QnaState sQnaStateInstance = new QnaState();
 

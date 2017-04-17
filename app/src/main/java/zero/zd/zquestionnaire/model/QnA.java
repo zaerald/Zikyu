@@ -1,11 +1,11 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zquestionnaire.model;
 
 /**
  * QnA class for creating Questions and Answers, this class provides
  * methods for accessing questions and asnwers
  */
 
-class QnA {
+public class QnA {
 
     private String mQuestion;
     private String mAnswer;
