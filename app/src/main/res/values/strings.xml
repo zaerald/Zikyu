@@ -28,7 +28,7 @@
 
     <!-- START: Load Activity-->
     <string name="title_load">Load QnA</string>
-    <string name="action_load_qna">Load QnA</string>
+    <string name="action_load_qna">Load</string>
     <string name="msg_choose_file">Choose a Subject to load</string>
 
     <!-- START: Result Activity -->
