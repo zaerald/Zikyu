@@ -74,4 +74,14 @@ public class LoadQnaActivity extends AppCompatActivity {
 
         startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
     }
+
+//    /**
+//     * Method used to initialize/populate QnA data into QnAList
+//     */
+//    private void populateQnA() {
+//        mQnAList = new ArrayList<>();
+//        mQnAList = QnAHelper.getBasicQnA();
+//        Collections.shuffle(mQnAList);
+//        QnaState.getInstance().setQnAList(mQnAList);
+//    }
 }
