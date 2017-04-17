@@ -10,7 +10,7 @@ import zero.zd.zquestionnaire.model.QnA;
  * for future feature: choosing diff topics instead of 1 topic
  * Note: temporary implementation
  */
-class QnAHelper {
+class QnaHelper {
 
     // TODO: add more QnA, import & export file
     static ArrayList<QnA> getBasicQnA() {

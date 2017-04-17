@@ -156,7 +156,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
      */
     private void populateQnA() {
         mQnAList = new ArrayList<>();
-        mQnAList = QnAHelper.getBasicQnA();
+        mQnAList = QnaHelper.getBasicQnA();
         Collections.shuffle(mQnAList);
         QnaState.getInstance().setQnAList(mQnAList);
     }
