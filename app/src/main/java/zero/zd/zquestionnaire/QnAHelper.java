@@ -11,27 +11,9 @@ import zero.zd.zquestionnaire.model.QnA;
  * Note: temporary implementation
  */
 class QnAHelper {
-    private static QnAHelper sInstance;
-
-    private ArrayList<ArrayList<QnA>> mSubjectList;
-
-    public static QnAHelper getInstance() {
-        if (sInstance == null)
-            sInstance = new QnAHelper();
-        return sInstance;
-    }
-
-    private QnAHelper() {}
-
-    public ArrayList<ArrayList<QnA>> getSubjectList() {
-        // populate subject list
-        mSubjectList.add(getBasicQnA());
-
-        return mSubjectList;
-    }
 
     // TODO: add more QnA, import & export file
-    private ArrayList<QnA> getBasicQnA() {
+    static ArrayList<QnA> getBasicQnA() {
         ArrayList<QnA> qnaList = new ArrayList<>();
         qnaList.add(new QnA("ABC", "ABC"));
         qnaList.add(new QnA("DEF", "DEF"));
