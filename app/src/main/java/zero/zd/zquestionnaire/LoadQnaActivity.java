@@ -22,10 +22,6 @@ public class LoadQnaActivity extends AppCompatActivity {
 
     private static final String TAG = LoadQnaActivity.class.getSimpleName();
 
-    private List<String> mQnaFileList;
-    private String mSelectedName;
-
-
     public static Intent getStartIntent(Context context) {
         return new Intent(context, LoadQnaActivity.class);
     }
@@ -37,20 +33,6 @@ public class LoadQnaActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        mQnaFileList = new ArrayList<>();
-
-        ListView list = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mQnaFileList);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mSelectedName = mQnaFileList.get(position);
-            }
-        });
     }
 
     @Override
@@ -62,26 +44,4 @@ public class LoadQnaActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void onClickLoad(View view) {
-        Toast.makeText(LoadQnaActivity.this, mSelectedName, Toast.LENGTH_SHORT).show();
-
-        // populate qna
-        ArrayList<QnA> qnaList = QnAHelper.getBasicQnA();
-        Collections.shuffle(qnaList);
-        QnaState.getInstance().setQnAList(qnaList);
-        Log.d(TAG, "QnA Populated");
-
-        startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
-    }
-
-//    /**
-//     * Method used to initialize/populate QnA data into QnAList
-//     */
-//    private void populateQnA() {
-//        mQnAList = new ArrayList<>();
-//        mQnAList = QnAHelper.getBasicQnA();
-//        Collections.shuffle(mQnAList);
-//        QnaState.getInstance().setQnAList(mQnAList);
-//    }
 }
