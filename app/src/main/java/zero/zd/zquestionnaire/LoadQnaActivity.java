@@ -38,19 +38,6 @@ public class LoadQnaActivity extends AppCompatActivity {
 
         mQnaFileList = new ArrayList<>();
 
-        File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZQuestionnaire/");
-        File files[] = folder.listFiles();
-
-        if (files.length != 0) {
-            for (File f : files) {
-                String name = f.getName();
-                if (!name.contains(".zdq"))
-                    continue;
-                name = name.substring(0, name.length() - 4);
-                mQnaFileList.add(name);
-            }
-        }
-
         ListView list = (ListView) findViewById(R.id.list);
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mQnaFileList);

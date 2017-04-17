@@ -16,12 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // create a folder
-        File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZQuestionnaire/");
-        if (!folder.exists()) {
-            if (!folder.mkdirs()) Log.e(TAG, "Failed on creating folders.");
-        }
     }
 
     public void onClickAnswer(View view) {
