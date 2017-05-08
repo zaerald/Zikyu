@@ -319,7 +319,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private void showMistakeDialog() {
         String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
         new AlertDialog.Builder(QnaAnswerActivity.this)
-                .setTitle("Mistake!")
+                .setTitle(R.string.msg_mistake)
                 .setMessage(msg)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

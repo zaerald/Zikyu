@@ -28,7 +28,6 @@
 
     <!-- START: Load Activity-->
     <string name="title_load">Load QnA</string>
-    <string name="action_load_qna">Load</string>
     <string name="msg_choose_file">Choose a Subject to load</string>
 
     <string name="list_qna_count">QnA Count: %1$d.</string>

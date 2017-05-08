@@ -1,7 +1,5 @@
 package zero.zd.zquestionnaire;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 import zero.zd.zquestionnaire.model.QnA;
@@ -16,11 +14,12 @@ public class QnaState {
     private ArrayList<QnA> mMistakeQnaList;
 
 
+    private QnaState() {
+    }
+
     public static QnaState getInstance() {
         return sQnaStateInstance;
     }
-
-    private QnaState() {}
 
     public QnaSubject getQnaSubject() {
         return mQnaSubject;
