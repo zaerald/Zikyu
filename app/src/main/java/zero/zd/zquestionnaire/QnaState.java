@@ -36,17 +36,14 @@ public class QnaState {
     public void setMistakeQnaList(ArrayList<QnA> mistakeQnaList) {
         mMistakeQnaList = mistakeQnaList;
     }
-<<<<<<< HEAD
 
-//    @Override
-//    public String toString() {
-//        String out = "QNA LIST: \n";
-//        for (QnA qna : mQnAList) {
-//            out += qna.toString() + "\n";
-//        }
-//        out += "END";
-//        return out;
-//    }
-=======
->>>>>>> Add Mistake QnA List
+    @Override
+    public String toString() {
+        String out = "QNA LIST: \n";
+        for (QnA qna : mQnAList) {
+            out += qna.toString() + "\n";
+        }
+        out += "END";
+        return out;
+    }
 }
