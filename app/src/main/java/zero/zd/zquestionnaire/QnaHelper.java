@@ -4,6 +4,7 @@ package zero.zd.zquestionnaire;
 import java.util.ArrayList;
 
 import zero.zd.zquestionnaire.model.QnA;
+import zero.zd.zquestionnaire.model.QnaSubject;
 
 /**
  * Helper class for retrieving QnA for different topics.
@@ -13,7 +14,7 @@ import zero.zd.zquestionnaire.model.QnA;
 class QnaHelper {
 
     // TODO: add more QnA, import & export file
-    static ArrayList<QnA> getBasicQnA() {
+    static QnaSubject getBasicQnA() {
         ArrayList<QnA> qnaList = new ArrayList<>();
         qnaList.add(new QnA("ABC", "ABC"));
         qnaList.add(new QnA("DEF", "DEF"));
@@ -26,7 +27,7 @@ class QnaHelper {
         qnaList.add(new QnA("YZA", "YZA"));
         qnaList.add(new QnA("BCD", "BCD"));
 
-        return qnaList;
+        return new QnaSubject("Debug", qnaList);
     }
 
 

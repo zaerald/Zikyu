@@ -28,6 +28,9 @@ import zero.zd.zquestionnaire.model.QnA;
 public class QnaAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = QnaAnswerActivity.class.getSimpleName();
+
+    private static final String EXTRA_IS_MISTAKE_LOADED = "EXTRA_IS_MISTAKE_LOADED";
+
     private static final String SAVED_QNA_INDEX = "SAVED_QNA_INDEX";
     private static final String SAVED_ANSWER_LOCATION_INDEX = "SAVED_ANSWER_LOCATION_INDEX";
     private static final String SAVED_CORRECT_ANSWER = "SAVED_CORRECT_ANSWER";
@@ -39,6 +42,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     TextView mTextQuestion;
 
     private ArrayList<QnA> mQnAList;
+    private ArrayList<QnA> mMistakeQnaList;
     private int mQnAIndex;
     private int mAnswerLocationIndex;
     private int mCorrect;
@@ -47,6 +51,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, QnaAnswerActivity.class);
+    }
+
+    public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
+        Intent intent = new Intent(context, QnaAnswerActivity.class);
+        intent.putExtra(EXTRA_IS_MISTAKE_LOADED, isMistakesLoaded);
+        return intent;
     }
 
     @Override
@@ -71,10 +81,33 @@ public class QnaAnswerActivity extends AppCompatActivity {
         });
         mTextQuestion = (TextView) findViewById(R.id.text_question);
 
+        mQnAList = new ArrayList<>();
+        mMistakeQnaList = new ArrayList<>();
+
+        // check if mistake is loaded
+        boolean isMistakesLoaded = getIntent()
+                .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
+        if (isMistakesLoaded) {
+            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+            mQnAList = new ArrayList<>(mMistakeQnaList);
+            QnaState.getInstance().setQnAList(mQnAList);
+            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+            mMistakeQnaList.clear();
+            Log.d(TAG, "Clean mistakeList");
+            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+
+            Log.d(TAG, "Mistakes Loaded!");
+        }
+        // set qna list
+        Log.d(TAG, "LOAD");
+        mQnAList = QnaState.getInstance().getQnAList();
+        Log.d(TAG, "LOADED " + QnaState.getInstance().toString());
+
         // retrieve saved instances
         if (savedInstanceState != null) {
-            mQnAList = new ArrayList<>();
-            mQnAList = QnaState.getInstance().getQnAList();
+            mMistakeQnaList = new ArrayList<>();
+            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+
             mQnAIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
             mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
@@ -82,17 +115,21 @@ public class QnaAnswerActivity extends AppCompatActivity {
             isInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
 
             updateQuestionText();
+            Log.d(TAG, "Activity recreated.");
         } else {
-            populateQnA();
+            // @CHANGED: removed populate qna
             mQnAIndex = 0;
 
             initQnA();
+            Log.d(TAG, "Activity initialized.");
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
         outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
         outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
@@ -142,6 +179,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
         if (selectedRadioButton != mAnswerLocationIndex) {
+            // add QnA to mistake list
+            mMistakeQnaList.add(mQnAList.get(mQnAIndex));
+
             showMistakeDialog();
             mMistake++;
         } else {
@@ -149,16 +189,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mCorrect++;
             updateQna();
         }
-    }
-
-    /**
-     * Method used to initialize/populate QnA data into QnAList
-     */
-    private void populateQnA() {
-        mQnAList = new ArrayList<>();
-        mQnAList = QnaHelper.getBasicQnA();
-        Collections.shuffle(mQnAList);
-        QnaState.getInstance().setQnAList(mQnAList);
     }
 
     /**
@@ -256,7 +286,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mCorrect = 0;
         mMistake = 0;
 
-        populateQnA();
         initQnA();
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
@@ -266,6 +295,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private void updateQna() {
         mQnAIndex++;
         if (mQnAIndex == mQnAList.size()) {
+            // update mistake list
+            QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
             // get passing
             String assessment = "Failed!";
             int passingCorrectPoints = mQnAList.size() / 2;
