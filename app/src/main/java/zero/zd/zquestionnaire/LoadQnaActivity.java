@@ -25,8 +25,6 @@ public class LoadQnaActivity extends AppCompatActivity {
     private static final String TAG = LoadQnaActivity.class.getSimpleName();
 
     private ArrayList<QnaSubject> mSubjectList;
-    private int mSelectedIndex;
-
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, LoadQnaActivity.class);
@@ -36,9 +34,9 @@ public class LoadQnaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_qna);
-        if (getSupportActionBar() != null) {
+
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         mSubjectList = new ArrayList<>();
         mSubjectList.add(QnaHelper.getBasicQnA());
@@ -53,7 +51,7 @@ public class LoadQnaActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mSelectedIndex = position;
+                QnaState.getInstance().setQnaSubject(mSubjectList.get(position));
                 startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
             }
         });
