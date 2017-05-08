@@ -54,6 +54,7 @@ public class LoadQnaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mSelectedIndex = position;
+                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
             }
         });
     }
@@ -66,12 +67,6 @@ public class LoadQnaActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onClickLoad(View view) {
-        Toast.makeText(LoadQnaActivity.this, "Selected Index: "
-                + mSelectedIndex, Toast.LENGTH_SHORT).show();
-        startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
     }
 
     private static class ViewHolder {
