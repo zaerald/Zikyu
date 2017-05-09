@@ -295,19 +295,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private void updateQna() {
         mQnaIndex++;
         if (mQnaIndex == mQnaList.size()) {
-            // update mistake list
-            QnaState.getInstance().setQnaList(mQnaList);
-            QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
-
-            // get passing
-            String assessment = "Failed!";
-            int passingCorrectPoints = mQnaList.size() / 2;
-            if (mCorrect >= passingCorrectPoints)
-                assessment = "Passed!";
-
-            startActivity(QnaResultActivity
-                    .getStartIntent(this, assessment, mCorrect));
-            finish();
+            showResultActivity();
             return;
         }
 
@@ -335,4 +323,19 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void showResultActivity() {
+        // update mistake list
+        QnaState.getInstance().setQnaList(mQnaList);
+        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
+        // get passing
+        String assessment = "Failed!";
+        int passingCorrectPoints = mQnaList.size() / 2;
+        if (mCorrect >= passingCorrectPoints)
+            assessment = "Passed!";
+
+        startActivity(QnaResultActivity
+                .getStartIntent(this, assessment, mCorrect));
+        finish();
+    }
 }
