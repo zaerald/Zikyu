@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import zero.zd.zquestionnaire.model.QnA;
@@ -40,9 +41,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     Button mOkButton;
     TextView mTextQuestion;
 
-    private ArrayList<QnA> mQnAList;
+    private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
-    private int mQnAIndex;
+    private int mQnaIndex;
     private int mAnswerLocationIndex;
     private int mCorrect;
     private int mMistake;
@@ -75,31 +76,33 @@ public class QnaAnswerActivity extends AppCompatActivity {
         });
         mTextQuestion = (TextView) findViewById(R.id.text_question);
 
-        mQnAList = new ArrayList<>();
+        mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
 
         // check if mistake is loaded
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
         if (isMistakesLoaded) {
-            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
-            mQnAList = new ArrayList<>(mMistakeQnaList);
-            QnaState.getInstance().setQnAList(mQnAList);
-            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+            mQnaList = new ArrayList<>(QnaState.getInstance().getMistakeQnaList());
+            QnaState.getInstance().setQnaList(mQnaList);
+            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
             mMistakeQnaList.clear();
             Log.d(TAG, "Clean mistakeList");
-            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
-        mQnAList = QnaState.getInstance().getQnAList();
+        mQnaList = QnaState.getInstance().getQnaList(true);
+        Collections.shuffle(mQnaList);
 
         // retrieve saved instances
         if (savedInstanceState != null) {
             mMistakeQnaList = new ArrayList<>();
+            mQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+            mQnaList = QnaState.getInstance().getQnaList(false);
 
-            mQnAIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
+            mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
             mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
             mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
@@ -108,7 +111,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             updateQuestionText();
             Log.d(TAG, "Activity recreated.");
         } else {
-            mQnAIndex = 0;
+            mQnaIndex = 0;
 
             initQnA();
             Log.d(TAG, "Activity initialized.");
@@ -118,9 +121,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        QnaState.getInstance().setQnaList(mQnaList);
         QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
-        outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
+        outState.putInt(SAVED_QNA_INDEX, mQnaIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
         outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
         outState.putInt(SAVED_MISTAKE_ANSWER, mMistake);
@@ -170,7 +174,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         if (selectedRadioButton != mAnswerLocationIndex) {
             // add QnA to mistake list
-            mMistakeQnaList.add(mQnAList.get(mQnAIndex));
+            mMistakeQnaList.add(mQnaList.get(mQnaIndex));
 
             showMistakeDialog();
             mMistake++;
@@ -183,7 +187,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     /**
      * Method to initialize a question and answer,
-     * updates GUI and will run on every increment of mQnAIndex
+     * updates GUI and will run on every increment of mQnaIndex
      */
     private void initQnA() {
         updateQuestionText();
@@ -216,18 +220,18 @@ public class QnaAnswerActivity extends AppCompatActivity {
         radioList.add(btnFour);
 
 //        Log.i(TAG, "AnswerLoc: " + mAnswerLocationIndex);
-        radioList.get(mAnswerLocationIndex).setText(mQnAList.get(mQnAIndex).getAnswer());
+        radioList.get(mAnswerLocationIndex).setText(mQnaList.get(mQnaIndex).getAnswer());
         int randIndex = 0;
         for (int i = 0; i < 4; i++) {
             if (i == mAnswerLocationIndex)
                 continue;
-            radioList.get(i).setText(mQnAList.get(randIndices[randIndex]).getAnswer());
+            radioList.get(i).setText(mQnaList.get(randIndices[randIndex]).getAnswer());
             randIndex++;
         }
 
         TextView txtProgress = (TextView) findViewById(R.id.text_progress);
         txtProgress.setText(String.format(getResources().getString(R.string.msg_progress),
-                mQnAIndex + 1, mQnAList.size(), mCorrect, mMistake));
+                mQnaIndex + 1, mQnaList.size(), mCorrect, mMistake));
         mRadioGroup.clearCheck();
         isInitialized = true;
     }
@@ -247,8 +251,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private boolean isRandomIndexExists(int[] arr, int target) {
         for (int x : arr)
             if (x == target
-                    || mQnAList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnAList.get(target).getAnswer()))
+                    || mQnaList.get(x).getAnswer()
+                    .equalsIgnoreCase(mQnaList.get(target).getAnswer()))
                 return true;
         return false;
     }
@@ -262,14 +266,14 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int getRandomIndex() {
 
         // @TODO: if list is < 4 app crashes
-        if (mQnAList.size() < 4)
+        if (mQnaList.size() < 4)
             throw new AssertionError("List must be at least 4");
 
         Random random = new Random();
         while (true) {
-            int x = random.nextInt(mQnAList.size());
-            if (x != mQnAIndex && !mQnAList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnAList.get(mQnAIndex).getAnswer())) return x;
+            int x = random.nextInt(mQnaList.size());
+            if (x != mQnaIndex && !mQnaList.get(x).getAnswer()
+                    .equalsIgnoreCase(mQnaList.get(mQnaIndex).getAnswer())) return x;
         }
     }
 
@@ -277,10 +281,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * Resets the states of the variables, for resetting QnA
      */
     private void resetQnA() {
-        mQnAIndex = 0;
+        mQnaIndex = 0;
         mCorrect = 0;
         mMistake = 0;
 
+        mQnaList = QnaState.getInstance().getQnaList(true);
         initQnA();
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
@@ -288,14 +293,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     private void updateQna() {
-        mQnAIndex++;
-        if (mQnAIndex == mQnAList.size()) {
+        mQnaIndex++;
+        if (mQnaIndex == mQnaList.size()) {
             // update mistake list
+            QnaState.getInstance().setQnaList(mQnaList);
             QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
             // get passing
             String assessment = "Failed!";
-            int passingCorrectPoints = mQnAList.size() / 2;
+            int passingCorrectPoints = mQnaList.size() / 2;
             if (mCorrect >= passingCorrectPoints)
                 assessment = "Passed!";
 
@@ -310,11 +316,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     private void updateQuestionText() {
-        mTextQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
+        mTextQuestion.setText(mQnaList.get(mQnaIndex).getQuestion());
     }
 
     private void showMistakeDialog() {
-        String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+        String msg = "Correct Answer: \n" + mQnaList.get(mQnaIndex).getAnswer();
         new AlertDialog.Builder(QnaAnswerActivity.this)
                 .setTitle(R.string.msg_mistake)
                 .setMessage(msg)
