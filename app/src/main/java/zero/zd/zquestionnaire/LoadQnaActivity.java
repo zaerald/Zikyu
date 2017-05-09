@@ -55,7 +55,7 @@ public class LoadQnaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 QnaState.getInstance().setQnaSubject(mSubjectList.get(position));
-                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
+                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this, false));
             }
         });
     }

@@ -48,10 +48,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mMistake;
     private boolean isInitialized;
 
-    public static Intent getStartIntent(Context context) {
-        return new Intent(context, QnaAnswerActivity.class);
-    }
-
     public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
         Intent intent = new Intent(context, QnaAnswerActivity.class);
         intent.putExtra(EXTRA_IS_MISTAKE_LOADED, isMistakesLoaded);
@@ -98,9 +94,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
-        Log.d(TAG, "LOAD");
         mQnAList = QnaState.getInstance().getQnAList();
-        Log.d(TAG, "LOADED " + QnaState.getInstance().toString());
 
         // retrieve saved instances
         if (savedInstanceState != null) {
@@ -116,7 +110,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
             updateQuestionText();
             Log.d(TAG, "Activity recreated.");
         } else {
-            // @CHANGED: removed populate qna
             mQnAIndex = 0;
 
             initQnA();
