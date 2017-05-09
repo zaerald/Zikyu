@@ -61,7 +61,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(R.string.title_qna);
+            actionBar.setTitle(QnaState.getInstance().getQnaSubject().getSubjectName());
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -89,7 +89,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mMistakeQnaList.clear();
             Log.d(TAG, "Clean mistakeList");
             Log.d(TAG, "mQnAList Size: " + mQnAList.size());
-
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
@@ -261,6 +260,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
      * @return random index
      */
     private int getRandomIndex() {
+
+        // @TODO: if list is < 4 app crashes
+        if (mQnAList.size() < 4)
+            throw new AssertionError("List must be at least 4");
+
         Random random = new Random();
         while (true) {
             int x = random.nextInt(mQnAList.size());
