@@ -70,8 +70,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (isInitialized)
-                    mOkButton.setEnabled(true);
+                if (isInitialized) mOkButton.setEnabled(true);
             }
         });
         mTextQuestion = (TextView) findViewById(R.id.text_question);
@@ -298,6 +297,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
             startActivity(QnaResultActivity
                     .getStartIntent(this, assessment, mCorrect));
+            finish();
             return;
         }
 

@@ -52,5 +52,6 @@ public class QnaResultActivity extends AppCompatActivity {
 
     public void onClickAnswerMistakes(View view) {
         startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, true));
+        finish();
     }
 }
