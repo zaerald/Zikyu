@@ -40,8 +40,7 @@ public class LoadQnaActivity extends AppCompatActivity {
 
         mSubjectList = new ArrayList<>();
         mSubjectList.add(QnaHelper.getBasicQnA());
-        mSubjectList.add(QnaHelper.getBasicQnA());
-        mSubjectList.add(QnaHelper.getBasicQnA());
+        mSubjectList.add(QnaHelper.getBasicQnaSmall());
 
         ListView list = (ListView) findViewById(R.id.list);
         ArrayAdapter adapter =

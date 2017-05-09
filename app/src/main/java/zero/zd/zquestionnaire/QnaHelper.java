@@ -30,5 +30,15 @@ class QnaHelper {
         return new QnaSubject("Debug", qnaList);
     }
 
+    static QnaSubject getBasicQnaSmall() {
+        ArrayList<QnA> qnaList = new ArrayList<>();
+        qnaList.add(new QnA("ABC", "ABC"));
+        qnaList.add(new QnA("DEF", "DEF"));
+        qnaList.add(new QnA("GHI", "GHI"));
+        qnaList.add(new QnA("JKL", "JKL"));
+        qnaList.add(new QnA("MNO", "MNO"));
+
+        return new QnaSubject("Debug Basic QnA Small", qnaList);
+    }
 
 }
