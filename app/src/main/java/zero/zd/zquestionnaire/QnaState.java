@@ -6,13 +6,12 @@ import zero.zd.zquestionnaire.model.QnA;
 import zero.zd.zquestionnaire.model.QnaSubject;
 
 public class QnaState {
-
     private static final String TAG = QnaState.class.getSimpleName();
     private static final QnaState sQnaStateInstance = new QnaState();
 
     private QnaSubject mQnaSubject;
+    private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
-
 
     private QnaState() {
     }
@@ -29,12 +28,14 @@ public class QnaState {
         mQnaSubject = qnaSubject;
     }
 
-    public ArrayList<QnA> getQnAList() {
-        return mQnaSubject.getQnaList();
+    public ArrayList<QnA> getQnaList(boolean isOriginalList) {
+        if (isOriginalList)
+            return mQnaSubject.getQnaList();
+        return mQnaList;
     }
 
-    public void setQnAList(ArrayList<QnA> qnAList) {
-        mQnaSubject.setQnaList(qnAList);
+    public void setQnaList(ArrayList<QnA> qnaList) {
+        mQnaList = qnaList;
     }
 
     public ArrayList<QnA> getMistakeQnaList() {
