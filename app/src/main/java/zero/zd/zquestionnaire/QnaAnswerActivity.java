@@ -92,7 +92,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
-        mQnaList = QnaState.getInstance().getQnaList(true);
+        mQnaList = QnaState.getInstance().getQnaList(!isMistakesLoaded);
         Collections.shuffle(mQnaList);
 
         // retrieve saved instances
