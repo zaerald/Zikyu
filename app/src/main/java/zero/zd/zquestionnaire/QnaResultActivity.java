@@ -54,4 +54,9 @@ public class QnaResultActivity extends AppCompatActivity {
         startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, true));
         finish();
     }
+
+    public void onClickLoadDifferentQna(View view) {
+        startActivity(LoadQnaActivity.getStartIntent(QnaResultActivity.this));
+        finish();
+    }
 }
