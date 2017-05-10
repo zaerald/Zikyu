@@ -37,7 +37,7 @@
     <string name="msg_result">You got %1$d / %2$d</string>
     <string name="action_answer_mistake">Answer Mistakes Only</string>
     <string name="action_reset_qna">Reset QnA</string>
-    <string name="action_load_different_qna">Load Different QnA</string>
+    <string name="action_load_different_qna">Load QnA</string>
 
     <!-- START: About Activity -->
     <string name="title_about_activity">About</string>
