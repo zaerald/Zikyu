@@ -48,9 +48,12 @@ public class QnaResultActivity extends AppCompatActivity {
         // update result message
         TextView textResult = (TextView) findViewById(R.id.text_msg_result);
         textResult.setText(getResources().getString(R.string.msg_result, correct, qnaTotal));
+
+        // update button
+
     }
 
-    public void onClickAnswerMistakes(View view) {
+    public void onClickAnswer(View view) {
         startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, true));
         finish();
     }
