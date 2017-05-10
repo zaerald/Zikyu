@@ -12,6 +12,7 @@ public class QnaState {
     private QnaSubject mQnaSubject;
     private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
+    private String[] mRandomAnswers;
 
     private QnaState() {
     }
@@ -44,6 +45,14 @@ public class QnaState {
 
     public void setMistakeQnaList(ArrayList<QnA> mistakeQnaList) {
         mMistakeQnaList = mistakeQnaList;
+    }
+
+    public String[] getRandomAnswers() {
+        return mRandomAnswers;
+    }
+
+    public void setRandomAnswers(String[] randomAnswers) {
+        mRandomAnswers = randomAnswers;
     }
 
     @Override

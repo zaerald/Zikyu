@@ -42,6 +42,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
+    private ArrayList<RadioButton> mRadioList;
+    private String[] mRandomAnswers;
     private int mQnaIndex;
     private int mAnswerLocationIndex;
     private int mCorrect;
@@ -73,6 +75,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 if (isInitialized) mOkButton.setEnabled(true);
             }
         });
+        initRadioGroup();
         mTextQuestion = (TextView) findViewById(R.id.text_question);
 
         mQnaList = new ArrayList<>();
@@ -92,7 +95,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
         // set qna list
         mQnaList = QnaState.getInstance().getQnaList(!isMistakesLoaded);
-        Collections.shuffle(mQnaList);
 
         // retrieve saved instances
         if (savedInstanceState != null) {
@@ -100,6 +102,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
             mQnaList = QnaState.getInstance().getQnaList(false);
+            mRandomAnswers = QnaState.getInstance().getRandomAnswers();
 
             mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
@@ -107,10 +110,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
             isInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
 
+            updateTextProgress();
             updateQuestionText();
+            updateRadioText();
             Log.d(TAG, "Activity recreated.");
         } else {
             mQnaIndex = 0;
+            Collections.shuffle(mQnaList);
 
             initQnA();
             Log.d(TAG, "Activity initialized.");
@@ -122,6 +128,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         QnaState.getInstance().setQnaList(mQnaList);
         QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+        QnaState.getInstance().setRandomAnswers(mRandomAnswers);
 
         outState.putInt(SAVED_QNA_INDEX, mQnaIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
@@ -190,36 +197,28 @@ public class QnaAnswerActivity extends AppCompatActivity {
      */
     private void initQnA() {
         updateQuestionText();
-        String[] randomAnswers = generateRandomAnswers();
+        mRandomAnswers = generateRandomAnswers();
 
         Random random = new Random();
         mAnswerLocationIndex = random.nextInt(4);
+        updateRadioText();
 
+        updateTextProgress();
+        mRadioGroup.clearCheck();
+        isInitialized = true;
+    }
+
+    private void initRadioGroup() {
         RadioButton btnOne = (RadioButton) findViewById(R.id.radio_one);
         RadioButton btnTwo = (RadioButton) findViewById(R.id.radio_two);
         RadioButton btnThree = (RadioButton) findViewById(R.id.radio_three);
         RadioButton btnFour = (RadioButton) findViewById(R.id.radio_four);
 
-        ArrayList<RadioButton> radioList = new ArrayList<>();
-        radioList.add(btnOne);
-        radioList.add(btnTwo);
-        radioList.add(btnThree);
-        radioList.add(btnFour);
-
-        radioList.get(mAnswerLocationIndex).setText(mQnaList.get(mQnaIndex).getAnswer());
-        int randIndex = 0;
-        for (int i = 0; i < 4; i++) {
-            if (i == mAnswerLocationIndex)
-                continue;
-            radioList.get(i).setText(randomAnswers[randIndex]);
-            randIndex++;
-        }
-
-        TextView txtProgress = (TextView) findViewById(R.id.text_progress);
-        txtProgress.setText(String.format(getResources().getString(R.string.msg_progress),
-                mQnaIndex + 1, mQnaList.size(), mCorrect, mMistake));
-        mRadioGroup.clearCheck();
-        isInitialized = true;
+        mRadioList = new ArrayList<>();
+        mRadioList.add(btnOne);
+        mRadioList.add(btnTwo);
+        mRadioList.add(btnThree);
+        mRadioList.add(btnFour);
     }
 
     /**
@@ -267,6 +266,17 @@ public class QnaAnswerActivity extends AppCompatActivity {
         return false;
     }
 
+    private void updateRadioText() {
+        mRadioList.get(mAnswerLocationIndex).setText(mQnaList.get(mQnaIndex).getAnswer());
+        int randIndex = 0;
+        for (int i = 0; i < 4; i++) {
+            if (i == mAnswerLocationIndex)
+                continue;
+            mRadioList.get(i).setText(mRandomAnswers[randIndex]);
+            randIndex++;
+        }
+    }
+
     /**
      * Resets the states of the variables, for resetting QnA
      */
@@ -296,6 +306,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     private void updateQuestionText() {
         mTextQuestion.setText(mQnaList.get(mQnaIndex).getQuestion());
+    }
+
+    private void updateTextProgress() {
+        TextView txtProgress = (TextView) findViewById(R.id.text_progress);
+        txtProgress.setText(String.format(getResources().getString(R.string.msg_progress),
+                mQnaIndex + 1, mQnaList.size(), mCorrect, mMistake));
     }
 
     private void showMistakeDialog() {
