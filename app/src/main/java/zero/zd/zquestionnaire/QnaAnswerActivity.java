@@ -321,7 +321,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         // get passing
         String assessment = "Failed!";
         int passingCorrectPoints = mQnaList.size() / 2;
-        if (mCorrect >= passingCorrectPoints)
+        if (mCorrect >= passingCorrectPoints && mCorrect != 0)
             assessment = "Passed!";
 
         startActivity(QnaResultActivity

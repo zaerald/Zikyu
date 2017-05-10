@@ -36,24 +36,24 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintBottom_toTopOf="@+id/button_answer_mistakes"
+        app:layout_constraintBottom_toTopOf="@+id/button_answer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Result Message"/>
 
     <Button
-        android:id="@+id/button_answer_mistakes"
+        android:id="@+id/button_answer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="onClickAnswerMistakes"
-        android:text="@string/action_answer_mistake"
+        android:onClick="onClickAnswer"
         app:layout_constraintBottom_toTopOf="@+id/button_load_different_qna"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Answer"/>
 
     <Button
         android:id="@+id/button_load_different_qna"
@@ -62,6 +62,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:onClick="onClickLoadDifferentQna"
         android:text="@string/action_load_different_qna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

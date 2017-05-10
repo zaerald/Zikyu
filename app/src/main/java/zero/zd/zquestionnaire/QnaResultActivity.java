@@ -7,6 +7,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class QnaResultActivity extends AppCompatActivity {
@@ -14,6 +15,8 @@ public class QnaResultActivity extends AppCompatActivity {
     private static final String TAG = QnaResultActivity.class.getSimpleName();
     private static final String EXTRA_ASSESSMENT = "EXTRA_ASSESSMENT";
     private static final String EXTRA_CORRECT = "EXTRA_CORRECT";
+
+    private boolean mIsReset;
 
     public static Intent getStartIntent(
             Context context, String assessment, int correct) {
@@ -48,10 +51,27 @@ public class QnaResultActivity extends AppCompatActivity {
         // update result message
         TextView textResult = (TextView) findViewById(R.id.text_msg_result);
         textResult.setText(getResources().getString(R.string.msg_result, correct, qnaTotal));
+
+        // update button
+        Button mAnswerButton = (Button) findViewById(R.id.button_answer);
+        if (correct == qnaTotal) {
+            // reset
+            mAnswerButton.setText(getResources().getString(R.string.action_reset_qna));
+            mIsReset = true;
+        } else {
+            // reload mistake
+            mAnswerButton.setText(getResources().getString(R.string.action_answer_mistake));
+            mIsReset = false;
+        }
     }
 
-    public void onClickAnswerMistakes(View view) {
-        startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, true));
+    public void onClickAnswer(View view) {
+        startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, !mIsReset));
+        finish();
+    }
+
+    public void onClickLoadDifferentQna(View view) {
+        startActivity(LoadQnaActivity.getStartIntent(QnaResultActivity.this));
         finish();
     }
 }
