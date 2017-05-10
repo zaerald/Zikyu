@@ -39,4 +39,8 @@
     <string name="action_reset_qna">Reset QnA</string>
     <string name="action_load_different_qna">Load Different QnA</string>
 
+    <!-- START: Information Activity -->
+    <string name="title_information_activity">Information</string>
+    <string name="action_info">Show Information</string>
+
 </resources>
