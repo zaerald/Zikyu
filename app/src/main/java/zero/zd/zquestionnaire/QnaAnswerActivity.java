@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -191,19 +190,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
      */
     private void initQnA() {
         updateQuestionText();
-
-        int[] randIndices = new int[3];
-        randIndices[0] = getRandomIndex();
-        for (int i = 1; i < 3; i++) {
-            while (true) {
-                int x = getRandomIndex();
-                if (!isRandomIndexExists(randIndices, x)) {
-                    randIndices[i] = x;
-                    break;
-                }
-            }
-        }
-        Log.i(TAG, "Random Indices: " + Arrays.toString(randIndices));
+        String[] randomAnswers = generateRandomAnswers();
 
         Random random = new Random();
         mAnswerLocationIndex = random.nextInt(4);
@@ -219,13 +206,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
         radioList.add(btnThree);
         radioList.add(btnFour);
 
-//        Log.i(TAG, "AnswerLoc: " + mAnswerLocationIndex);
         radioList.get(mAnswerLocationIndex).setText(mQnaList.get(mQnaIndex).getAnswer());
         int randIndex = 0;
         for (int i = 0; i < 4; i++) {
             if (i == mAnswerLocationIndex)
                 continue;
-            radioList.get(i).setText(mQnaList.get(randIndices[randIndex]).getAnswer());
+            radioList.get(i).setText(randomAnswers[randIndex]);
             randIndex++;
         }
 
@@ -237,44 +223,48 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if the answer index generated from {@code getRandomIndex()}
-     * if the index already exists on the generated index on array
-     * {@code randIndices} for 3 invalid answers
+     * Generates an invalid random answers
+     * which is not the same as the answer
      *
-     * @param arr    the array of 3 index of invalid answers to check
-     * @param target the newly generated index to compare to {@code arr}
-     * @return {@code true} if the array randIndices already contains the
-     * newly generated index of answer
-     * {@code false} no same index or answer already existed at {@code randIndices}
-     * @see #getRandomIndex()
+     * @return answerArray - generated random array of answers
      */
-    private boolean isRandomIndexExists(int[] arr, int target) {
-        for (int x : arr)
-            if (x == target
-                    || mQnaList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnaList.get(target).getAnswer()))
-                return true;
-        return false;
+    private String[] generateRandomAnswers() {
+        String[] answerArray = new String[3];
+
+        ArrayList<QnA> originalList = QnaState.getInstance().getQnaList(true);
+        String answer = mQnaList.get(mQnaIndex).getAnswer();
+
+        Random random = new Random();
+        for (int i = 0; i < answerArray.length; i++) {
+            String randomAnswer = "";
+            while (randomAnswer.equals("")
+                    || randomAnswer.equalsIgnoreCase(answer)
+                    || doesRandomAnswerExists(answerArray, randomAnswer)) {
+                int rand = random.nextInt(originalList.size());
+                randomAnswer = originalList.get(rand).getAnswer();
+            }
+
+            answerArray[i] = randomAnswer;
+        }
+        return answerArray;
     }
 
     /**
-     * Generates an invalid random answer index and returns an index
-     * which is not the same as the answer
+     * Checks if the newly generated random answer exists
+     * on the array of random answer
      *
-     * @return random index
+     * @param answerArray  the array of random answers
+     * @param randomAnswer the newly generated random answer
+     * @return true if the generated random answer is already at the array
      */
-    private int getRandomIndex() {
+    private boolean doesRandomAnswerExists(String[] answerArray, String randomAnswer) {
+        for (String answer : answerArray) {
+            if (answer == null) return false;
 
-        // @TODO: if list is < 4 app crashes
-        if (mQnaList.size() < 4)
-            throw new AssertionError("List must be at least 4");
-
-        Random random = new Random();
-        while (true) {
-            int x = random.nextInt(mQnaList.size());
-            if (x != mQnaIndex && !mQnaList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnaList.get(mQnaIndex).getAnswer())) return x;
+            if (answer.equalsIgnoreCase(randomAnswer))
+                return true;
         }
+        return false;
     }
 
     /**
