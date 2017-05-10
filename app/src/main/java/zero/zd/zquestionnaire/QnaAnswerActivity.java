@@ -342,12 +342,22 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         // get passing
         String assessment = "Failed!";
-        int passingCorrectPoints = mQnaList.size() / 2;
-        if (mCorrect >= passingCorrectPoints && mCorrect != 0)
+        if (mCorrect >= getPassingScore() && mCorrect != 0)
             assessment = "Passed!";
 
         startActivity(QnaResultActivity
                 .getStartIntent(this, assessment, mCorrect));
         finish();
+    }
+
+    private int getPassingScore() {
+        int passing;
+        int total = mQnaList.size();
+        if (total % 2 == 0)
+            passing = total / 2;
+        else
+            passing = (total / 2) + 1;
+
+        return passing;
     }
 }
