@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,8 +36,11 @@ public class LoadQnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_qna);
 
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_load);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mSubjectList = new ArrayList<>();
         mSubjectList.add(QnaHelper.getBasicQnA());
@@ -51,7 +55,7 @@ public class LoadQnaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 QnaState.getInstance().setQnaSubject(mSubjectList.get(position));
-                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this));
+                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this, false));
             }
         });
     }

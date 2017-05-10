@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -41,17 +40,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
     Button mOkButton;
     TextView mTextQuestion;
 
-    private ArrayList<QnA> mQnAList;
+    private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
-    private int mQnAIndex;
+    private int mQnaIndex;
     private int mAnswerLocationIndex;
     private int mCorrect;
     private int mMistake;
     private boolean isInitialized;
-
-    public static Intent getStartIntent(Context context) {
-        return new Intent(context, QnaAnswerActivity.class);
-    }
 
     public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
         Intent intent = new Intent(context, QnaAnswerActivity.class);
@@ -66,7 +61,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(R.string.title_qna);
+            actionBar.setTitle(QnaState.getInstance().getQnaSubject().getSubjectName());
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -75,40 +70,38 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (isInitialized)
-                    mOkButton.setEnabled(true);
+                if (isInitialized) mOkButton.setEnabled(true);
             }
         });
         mTextQuestion = (TextView) findViewById(R.id.text_question);
 
-        mQnAList = new ArrayList<>();
+        mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
 
         // check if mistake is loaded
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
         if (isMistakesLoaded) {
-            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
-            mQnAList = new ArrayList<>(mMistakeQnaList);
-            QnaState.getInstance().setQnAList(mQnAList);
-            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
+            mQnaList = new ArrayList<>(QnaState.getInstance().getMistakeQnaList());
+            QnaState.getInstance().setQnaList(mQnaList);
+            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
             mMistakeQnaList.clear();
             Log.d(TAG, "Clean mistakeList");
-            Log.d(TAG, "mQnAList Size: " + mQnAList.size());
-
+            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
-        Log.d(TAG, "LOAD");
-        mQnAList = QnaState.getInstance().getQnAList();
-        Log.d(TAG, "LOADED " + QnaState.getInstance().toString());
+        mQnaList = QnaState.getInstance().getQnaList(!isMistakesLoaded);
+        Collections.shuffle(mQnaList);
 
         // retrieve saved instances
         if (savedInstanceState != null) {
             mMistakeQnaList = new ArrayList<>();
+            mQnaList = new ArrayList<>();
             mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
+            mQnaList = QnaState.getInstance().getQnaList(false);
 
-            mQnAIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
+            mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
             mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
             mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
@@ -117,8 +110,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             updateQuestionText();
             Log.d(TAG, "Activity recreated.");
         } else {
-            // @CHANGED: removed populate qna
-            mQnAIndex = 0;
+            mQnaIndex = 0;
 
             initQnA();
             Log.d(TAG, "Activity initialized.");
@@ -128,9 +120,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        QnaState.getInstance().setQnaList(mQnaList);
         QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
-        outState.putInt(SAVED_QNA_INDEX, mQnAIndex);
+        outState.putInt(SAVED_QNA_INDEX, mQnaIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
         outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
         outState.putInt(SAVED_MISTAKE_ANSWER, mMistake);
@@ -180,7 +173,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         if (selectedRadioButton != mAnswerLocationIndex) {
             // add QnA to mistake list
-            mMistakeQnaList.add(mQnAList.get(mQnAIndex));
+            mMistakeQnaList.add(mQnaList.get(mQnaIndex));
 
             showMistakeDialog();
             mMistake++;
@@ -193,23 +186,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     /**
      * Method to initialize a question and answer,
-     * updates GUI and will run on every increment of mQnAIndex
+     * updates GUI and will run on every increment of mQnaIndex
      */
     private void initQnA() {
         updateQuestionText();
-
-        int[] randIndices = new int[3];
-        randIndices[0] = getRandomIndex();
-        for (int i = 1; i < 3; i++) {
-            while (true) {
-                int x = getRandomIndex();
-                if (!isRandomIndexExists(randIndices, x)) {
-                    randIndices[i] = x;
-                    break;
-                }
-            }
-        }
-        Log.i(TAG, "Random Indices: " + Arrays.toString(randIndices));
+        String[] randomAnswers = generateRandomAnswers();
 
         Random random = new Random();
         mAnswerLocationIndex = random.nextInt(4);
@@ -225,67 +206,76 @@ public class QnaAnswerActivity extends AppCompatActivity {
         radioList.add(btnThree);
         radioList.add(btnFour);
 
-//        Log.i(TAG, "AnswerLoc: " + mAnswerLocationIndex);
-        radioList.get(mAnswerLocationIndex).setText(mQnAList.get(mQnAIndex).getAnswer());
+        radioList.get(mAnswerLocationIndex).setText(mQnaList.get(mQnaIndex).getAnswer());
         int randIndex = 0;
         for (int i = 0; i < 4; i++) {
             if (i == mAnswerLocationIndex)
                 continue;
-            radioList.get(i).setText(mQnAList.get(randIndices[randIndex]).getAnswer());
+            radioList.get(i).setText(randomAnswers[randIndex]);
             randIndex++;
         }
 
         TextView txtProgress = (TextView) findViewById(R.id.text_progress);
         txtProgress.setText(String.format(getResources().getString(R.string.msg_progress),
-                mQnAIndex + 1, mQnAList.size(), mCorrect, mMistake));
+                mQnaIndex + 1, mQnaList.size(), mCorrect, mMistake));
         mRadioGroup.clearCheck();
         isInitialized = true;
     }
 
     /**
-     * Checks if the answer index generated from {@code getRandomIndex()}
-     * if the index already exists on the generated index on array
-     * {@code randIndices} for 3 invalid answers
+     * Generates an invalid random answers
+     * which is not the same as the answer
      *
-     * @param arr    the array of 3 index of invalid answers to check
-     * @param target the newly generated index to compare to {@code arr}
-     * @return {@code true} if the array randIndices already contains the
-     * newly generated index of answer
-     * {@code false} no same index or answer already existed at {@code randIndices}
-     * @see #getRandomIndex()
+     * @return answerArray - generated random array of answers
      */
-    private boolean isRandomIndexExists(int[] arr, int target) {
-        for (int x : arr)
-            if (x == target
-                    || mQnAList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnAList.get(target).getAnswer()))
-                return true;
-        return false;
+    private String[] generateRandomAnswers() {
+        String[] answerArray = new String[3];
+
+        ArrayList<QnA> originalList = QnaState.getInstance().getQnaList(true);
+        String answer = mQnaList.get(mQnaIndex).getAnswer();
+
+        Random random = new Random();
+        for (int i = 0; i < answerArray.length; i++) {
+            String randomAnswer = "";
+            while (randomAnswer.equals("")
+                    || randomAnswer.equalsIgnoreCase(answer)
+                    || doesRandomAnswerExists(answerArray, randomAnswer)) {
+                int rand = random.nextInt(originalList.size());
+                randomAnswer = originalList.get(rand).getAnswer();
+            }
+
+            answerArray[i] = randomAnswer;
+        }
+        return answerArray;
     }
 
     /**
-     * Generates an invalid random answer index and returns an index
-     * which is not the same as the answer
+     * Checks if the newly generated random answer exists
+     * on the array of random answer
      *
-     * @return random index
+     * @param answerArray  the array of random answers
+     * @param randomAnswer the newly generated random answer
+     * @return true if the generated random answer is already at the array
      */
-    private int getRandomIndex() {
-        Random random = new Random();
-        while (true) {
-            int x = random.nextInt(mQnAList.size());
-            if (x != mQnAIndex && !mQnAList.get(x).getAnswer()
-                    .equalsIgnoreCase(mQnAList.get(mQnAIndex).getAnswer())) return x;
+    private boolean doesRandomAnswerExists(String[] answerArray, String randomAnswer) {
+        for (String answer : answerArray) {
+            if (answer == null) return false;
+
+            if (answer.equalsIgnoreCase(randomAnswer))
+                return true;
         }
+        return false;
     }
 
     /**
      * Resets the states of the variables, for resetting QnA
      */
     private void resetQnA() {
-        mQnAIndex = 0;
+        mQnaIndex = 0;
         mCorrect = 0;
         mMistake = 0;
 
+        mQnaList = QnaState.getInstance().getQnaList(true);
         initQnA();
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
@@ -293,19 +283,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     private void updateQna() {
-        mQnAIndex++;
-        if (mQnAIndex == mQnAList.size()) {
-            // update mistake list
-            QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
-
-            // get passing
-            String assessment = "Failed!";
-            int passingCorrectPoints = mQnAList.size() / 2;
-            if (mCorrect >= passingCorrectPoints)
-                assessment = "Passed!";
-
-            startActivity(QnaResultActivity
-                    .getStartIntent(this, assessment, mCorrect));
+        mQnaIndex++;
+        if (mQnaIndex == mQnaList.size()) {
+            showResultActivity();
             return;
         }
 
@@ -314,13 +294,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     private void updateQuestionText() {
-        mTextQuestion.setText(mQnAList.get(mQnAIndex).getQuestion());
+        mTextQuestion.setText(mQnaList.get(mQnaIndex).getQuestion());
     }
 
     private void showMistakeDialog() {
-        String msg = "Correct Answer: \n" + mQnAList.get(mQnAIndex).getAnswer();
+        String msg = "Correct Answer: \n" + mQnaList.get(mQnaIndex).getAnswer();
         new AlertDialog.Builder(QnaAnswerActivity.this)
-                .setTitle("Mistake!")
+                .setTitle(R.string.msg_mistake)
                 .setMessage(msg)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -333,4 +313,19 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void showResultActivity() {
+        // update mistake list
+        QnaState.getInstance().setQnaList(mQnaList);
+        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+
+        // get passing
+        String assessment = "Failed!";
+        int passingCorrectPoints = mQnaList.size() / 2;
+        if (mCorrect >= passingCorrectPoints)
+            assessment = "Passed!";
+
+        startActivity(QnaResultActivity
+                .getStartIntent(this, assessment, mCorrect));
+        finish();
+    }
 }
