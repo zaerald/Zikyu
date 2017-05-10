@@ -20,14 +20,10 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".QnaAnswerActivity"
-            android:noHistory="true"/>
+        <activity android:name=".QnaAnswerActivity"/>
         <activity android:name=".QnaBuilderActivity"/>
         <activity android:name=".LoadQnaActivity"/>
-        <activity
-            android:name=".QnaResultActivity"
-            android:noHistory="true"/>
+        <activity android:name=".QnaResultActivity"/>
     </application>
 
 </manifest>
