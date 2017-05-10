@@ -31,6 +31,9 @@ public class QnaResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_result);
 
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(R.string.title_result_activity);
+
         // get values
         String assessment = getIntent().getStringExtra(EXTRA_ASSESSMENT);
         int correct = getIntent().getIntExtra(EXTRA_CORRECT, -1);
