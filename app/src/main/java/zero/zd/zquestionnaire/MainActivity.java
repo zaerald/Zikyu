@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_info:
-                startActivity(InformationActivity.getStartIntent(MainActivity.this));
+                startActivity(AboutActivity.getStartIntent(MainActivity.this));
                 break;
         }
         return super.onOptionsItemSelected(item);

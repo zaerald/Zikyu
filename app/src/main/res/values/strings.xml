@@ -39,8 +39,15 @@
     <string name="action_reset_qna">Reset QnA</string>
     <string name="action_load_different_qna">Load Different QnA</string>
 
-    <!-- START: Information Activity -->
-    <string name="title_information_activity">Information</string>
+    <!-- START: About Activity -->
+    <string name="title_about_activity">About</string>
     <string name="action_info">Show Information</string>
+    <string name="msg_version">Version: 0.0.0</string>
+    <string name="msg_developer">Developer: Zaerald Denze Lungos</string>
+    <string name="msg_app_description">Simple reviewer in Android. Lets you answer identification
+        questions with multiple choices, to practice and tackle the questions repeatedly. To help
+        students review and to test their knowledge before taking tests or exams, to know what are
+        the things they already know in the subject.
+    </string>
 
 </resources>
