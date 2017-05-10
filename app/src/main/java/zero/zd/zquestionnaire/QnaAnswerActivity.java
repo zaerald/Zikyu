@@ -3,6 +3,7 @@ package zero.zd.zquestionnaire;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
@@ -184,10 +185,14 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
             showMistakeDialog();
             mMistake++;
+
+            MediaPlayer.create(this, R.raw.mistake).start();
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
             updateQna();
+
+            MediaPlayer.create(this, R.raw.correct).start();
         }
     }
 
