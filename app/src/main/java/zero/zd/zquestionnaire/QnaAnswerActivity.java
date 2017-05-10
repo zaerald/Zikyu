@@ -276,6 +276,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mMistake = 0;
 
         mQnaList = QnaState.getInstance().getQnaList(true);
+        Collections.shuffle(mQnaList);
         initQnA();
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
