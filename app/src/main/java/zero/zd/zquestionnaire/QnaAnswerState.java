@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import zero.zd.zquestionnaire.model.QnA;
 import zero.zd.zquestionnaire.model.QnaSubject;
 
-public class QnaState {
-    private static final String TAG = QnaState.class.getSimpleName();
-    private static final QnaState sQnaStateInstance = new QnaState();
+public class QnaAnswerState {
+    private static final String TAG = QnaAnswerState.class.getSimpleName();
+    private static final QnaAnswerState S_QNA_ANSWER_STATE_INSTANCE = new QnaAnswerState();
 
     private QnaSubject mQnaSubject;
     private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
     private String[] mRandomAnswers;
 
-    private QnaState() {
+    private QnaAnswerState() {
     }
 
-    public static QnaState getInstance() {
-        return sQnaStateInstance;
+    public static QnaAnswerState getInstance() {
+        return S_QNA_ANSWER_STATE_INSTANCE;
     }
 
     public QnaSubject getQnaSubject() {

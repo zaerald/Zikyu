@@ -64,7 +64,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(QnaState.getInstance().getQnaSubject().getSubjectName());
+            actionBar.setTitle(QnaAnswerState.getInstance().getQnaSubject().getSubjectName());
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -86,8 +86,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
         if (isMistakesLoaded) {
-            mQnaList = new ArrayList<>(QnaState.getInstance().getMistakeQnaList());
-            QnaState.getInstance().setQnaList(mQnaList);
+            mQnaList = new ArrayList<>(QnaAnswerState.getInstance().getMistakeQnaList());
+            QnaAnswerState.getInstance().setQnaList(mQnaList);
             Log.d(TAG, "mQnaList Size: " + mQnaList.size());
             mMistakeQnaList.clear();
             Log.d(TAG, "Clean mistakeList");
@@ -95,15 +95,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
             Log.d(TAG, "Mistakes Loaded!");
         }
         // set qna list
-        mQnaList = QnaState.getInstance().getQnaList(!isMistakesLoaded);
+        mQnaList = QnaAnswerState.getInstance().getQnaList(!isMistakesLoaded);
 
         // retrieve saved instances
         if (savedInstanceState != null) {
             mMistakeQnaList = new ArrayList<>();
             mQnaList = new ArrayList<>();
-            mMistakeQnaList = QnaState.getInstance().getMistakeQnaList();
-            mQnaList = QnaState.getInstance().getQnaList(false);
-            mRandomAnswers = QnaState.getInstance().getRandomAnswers();
+            mMistakeQnaList = QnaAnswerState.getInstance().getMistakeQnaList();
+            mQnaList = QnaAnswerState.getInstance().getQnaList(false);
+            mRandomAnswers = QnaAnswerState.getInstance().getRandomAnswers();
 
             mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
@@ -127,9 +127,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        QnaState.getInstance().setQnaList(mQnaList);
-        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
-        QnaState.getInstance().setRandomAnswers(mRandomAnswers);
+        QnaAnswerState.getInstance().setQnaList(mQnaList);
+        QnaAnswerState.getInstance().setMistakeQnaList(mMistakeQnaList);
+        QnaAnswerState.getInstance().setRandomAnswers(mRandomAnswers);
 
         outState.putInt(SAVED_QNA_INDEX, mQnaIndex);
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
@@ -235,7 +235,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private String[] generateRandomAnswers() {
         String[] answerArray = new String[3];
 
-        ArrayList<QnA> originalList = QnaState.getInstance().getQnaList(true);
+        ArrayList<QnA> originalList = QnaAnswerState.getInstance().getQnaList(true);
         String answer = mQnaList.get(mQnaIndex).getAnswer();
 
         Random random = new Random();
@@ -290,7 +290,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mCorrect = 0;
         mMistake = 0;
 
-        mQnaList = QnaState.getInstance().getQnaList(true);
+        mQnaList = QnaAnswerState.getInstance().getQnaList(true);
         Collections.shuffle(mQnaList);
         initQnA();
 
@@ -337,8 +337,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     private void showResultActivity() {
         // update mistake list
-        QnaState.getInstance().setQnaList(mQnaList);
-        QnaState.getInstance().setMistakeQnaList(mMistakeQnaList);
+        QnaAnswerState.getInstance().setQnaList(mQnaList);
+        QnaAnswerState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
         // get passing
         String assessment = "Failed!";

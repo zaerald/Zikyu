@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class LoadQnaActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                QnaState.getInstance().setQnaSubject(mSubjectList.get(position));
+                QnaAnswerState.getInstance().setQnaSubject(mSubjectList.get(position));
                 startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this, false));
             }
         });
