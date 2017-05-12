@@ -41,4 +41,16 @@ class QnaHelper {
         return new QnaSubject("Debug Basic QnA Small", qnaList);
     }
 
+    static QnaSubject getBasicQnaMultiple() {
+        ArrayList<QnA> qnaList = new ArrayList<>();
+        String[] dummyAnswers = {"X", "Y", "Z"};
+        qnaList.add(new QnA("ABC", "ABC", dummyAnswers));
+        qnaList.add(new QnA("DEF", "DEF", dummyAnswers));
+        qnaList.add(new QnA("GHI", "GHI", dummyAnswers));
+        qnaList.add(new QnA("JKL", "JKL", dummyAnswers));
+        qnaList.add(new QnA("MNO", "MNO", dummyAnswers));
+
+        return new QnaSubject("Debug Basic QnA Multiple", qnaList);
+    }
+
 }
