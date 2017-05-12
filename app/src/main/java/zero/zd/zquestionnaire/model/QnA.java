@@ -9,11 +9,17 @@ public class QnA {
 
     private String mQuestion;
     private String mAnswer;
+    private String[] mRandomAnswers;
 
     public QnA(String question, String answer) {
+        this(question, answer, new String[0]);
+    }
+
+    public QnA(String question, String answer, String[] randomAnswers) {
         question = question.substring(0, 1).toUpperCase() + question.substring(1);
         this.mQuestion = question;
         this.mAnswer = answer;
+        this.mRandomAnswers = randomAnswers;
     }
 
     public String getQuestion() {
@@ -30,6 +36,14 @@ public class QnA {
 
     public void setAnswer(String answer) {
         this.mAnswer = answer;
+    }
+
+    public String[] getRandomAnswers() {
+        return mRandomAnswers;
+    }
+
+    public void setRandomAnswers(String[] randomAnswers) {
+        mRandomAnswers = randomAnswers;
     }
 
     @Override
