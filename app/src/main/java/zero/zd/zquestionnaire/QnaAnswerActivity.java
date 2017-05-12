@@ -202,7 +202,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
      */
     private void initQnA() {
         updateQuestionText();
-        mRandomAnswers = generateRandomAnswers();
+
+        mRandomAnswers = mQnaList.get(mQnaIndex).getRandomAnswers();
+        if (mRandomAnswers.length == 0)
+            mRandomAnswers = generateRandomAnswers();
 
         Random random = new Random();
         mAnswerLocationIndex = random.nextInt(4);
