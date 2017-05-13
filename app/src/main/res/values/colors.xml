@@ -6,4 +6,6 @@
 
     <color name="assessment_passed">#2ecc71</color>
     <color name="assessment_failed">#e74c3c</color>
+
+    <color name="colorText">#333333</color>
 </resources>
