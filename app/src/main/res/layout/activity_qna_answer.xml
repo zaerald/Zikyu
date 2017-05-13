@@ -34,7 +34,8 @@
             android:id="@+id/text_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorText"
             tools:text="Question"/>
     </ScrollView>
 
@@ -42,14 +43,14 @@
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        >
+        android:layout_weight=".2">
 
         <RadioButton
             android:id="@+id/radio_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorText"
             tools:text="RadioButton 1"/>
 
         <RadioButton
@@ -57,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorText"
             tools:text="RadioButton 2"/>
 
         <RadioButton
@@ -64,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorText"
             tools:text="RadioButton 3"/>
 
         <RadioButton
@@ -71,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorText"
             tools:text="RadioButton 4"/>
 
     </RadioGroup>
