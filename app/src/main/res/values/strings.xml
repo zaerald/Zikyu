@@ -11,6 +11,7 @@
     <string name="msg_correct">Correct!</string>
     <string name="msg_mistake">Mistake!</string>
     <string name="msg_reset">Questions and Answers were reset.</string>
+    <string name="msg_confirm_exit">Press back again to go back.</string>
 
     <string name="action_check_answer">Check Answer</string>
     <string name="action_overflow">Overflow</string>
