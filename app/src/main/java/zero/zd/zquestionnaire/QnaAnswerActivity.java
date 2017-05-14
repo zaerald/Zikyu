@@ -3,6 +3,7 @@ package zero.zd.zquestionnaire;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,7 +40,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private static final String SAVED_MISTAKE_ANSWER = "SAVED_MISTAKE_ANSWER";
     private static final String SAVED_IS_INITIALIZED = "SAVED_IS_INITIALIZED";
 
+    private static final String KEY_SOUND_ENABLED = "KEY_SOUND_ENABLED";
+    private static final String PREFS_SOUND = "PREFS_SOUND";
+
     final int DELAY_BACK_EXIT = 1500;
+
+    private SharedPreferences prefs;
 
     RadioGroup mRadioGroup;
     Button mOkButton;
@@ -53,6 +59,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mAnswerLocationIndex;
     private int mCorrect;
     private int mMistake;
+    private boolean mIsSoundEnabled;
     private boolean mIsInitialized;
     private boolean mIsBackPressed;
 
@@ -74,6 +81,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
 
         initViewObjects();
+
+        prefs = getSharedPreferences(PREFS_SOUND, MODE_PRIVATE);
+        mIsSoundEnabled = prefs.getBoolean(KEY_SOUND_ENABLED, false);
 
         mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
@@ -124,6 +134,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem soundItem = menu.findItem(R.id.action_sound);
+        soundItem.setChecked(mIsSoundEnabled);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
@@ -134,6 +151,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
             case R.id.action_reset:
                 resetQnA();
+                break;
+
+            case R.id.action_sound:
+                toggleSound(item);
                 break;
 
             case R.id.action_quit:
@@ -180,13 +201,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
             showMistakeDialog();
             mMistake++;
 
-            MediaPlayer.create(this, R.raw.mistake).start();
+            if (mIsSoundEnabled)
+                MediaPlayer.create(this, R.raw.mistake).start();
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
             updateQna();
 
-            MediaPlayer.create(this, R.raw.correct).start();
+            if (mIsSoundEnabled)
+                MediaPlayer.create(this, R.raw.correct).start();
         }
     }
 
@@ -391,6 +414,15 @@ public class QnaAnswerActivity extends AppCompatActivity {
             passing = (total / 2) + 1;
 
         return passing;
+    }
+
+    private void toggleSound(MenuItem soundItem) {
+        mIsSoundEnabled = !mIsSoundEnabled;
+        soundItem.setChecked(mIsSoundEnabled);
+
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(KEY_SOUND_ENABLED, mIsSoundEnabled);
+        prefsEditor.apply();
     }
 
     private void quitApplication() {
