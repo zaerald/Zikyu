@@ -39,7 +39,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private static final String SAVED_MISTAKE_ANSWER = "SAVED_MISTAKE_ANSWER";
     private static final String SAVED_IS_INITIALIZED = "SAVED_IS_INITIALIZED";
 
-    private final int DELAY_BACK_EXIT = 1500;
+    final int DELAY_BACK_EXIT = 1500;
 
     RadioGroup mRadioGroup;
     Button mOkButton;
@@ -53,7 +53,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mAnswerLocationIndex;
     private int mCorrect;
     private int mMistake;
-    private boolean isInitialized;
+    private boolean mIsInitialized;
     private boolean mIsBackPressed;
 
     public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
@@ -78,7 +78,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (isInitialized) mOkButton.setEnabled(true);
+                if (mIsInitialized) mOkButton.setEnabled(true);
             }
         });
         initRadioGroup();
@@ -114,7 +114,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
             mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
             mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
-            isInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
+            mIsInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
 
             updateTextProgress();
             updateQuestionText();
@@ -140,7 +140,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         outState.putInt(SAVED_ANSWER_LOCATION_INDEX, mAnswerLocationIndex);
         outState.putInt(SAVED_CORRECT_ANSWER, mCorrect);
         outState.putInt(SAVED_MISTAKE_ANSWER, mMistake);
-        outState.putBoolean(SAVED_IS_INITIALIZED, isInitialized);
+        outState.putBoolean(SAVED_IS_INITIALIZED, mIsInitialized);
     }
 
     @Override
@@ -236,7 +236,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         updateTextProgress();
         mRadioGroup.clearCheck();
-        isInitialized = true;
+        mIsInitialized = true;
     }
 
     private void initRadioGroup() {
