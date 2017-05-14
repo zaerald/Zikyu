@@ -16,6 +16,7 @@
     <string name="action_check_answer">Check Answer</string>
     <string name="action_overflow">Overflow</string>
     <string name="action_reset">Reset QnA</string>
+    <string name="action_sound">Sound</string>
     <string name="action_quit">Quit</string>
 
     <!--START: QnaBuilderActivity-->

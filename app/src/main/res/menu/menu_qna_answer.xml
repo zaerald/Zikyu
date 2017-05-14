@@ -17,6 +17,13 @@
                 app:showAsAction="ifRoom|withText"/>
 
             <item
+                android:id="@+id/action_sound"
+                android:checkable="true"
+                android:title="@string/action_sound"
+                app:actionViewClass="android.widget.CheckBox"
+                app:showAsAction="ifRoom|withText"/>
+
+            <item
                 android:id="@+id/action_quit"
                 android:title="@string/action_quit"
                 app:showAsAction="ifRoom|withText"/>
