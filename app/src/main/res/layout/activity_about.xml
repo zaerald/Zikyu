@@ -45,8 +45,19 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="@string/msg_app_description"
             android:textAlignment="viewStart"
             android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/text_view_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_source"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/colorLinks"
+            android:textSize="18sp"/>
     </LinearLayout>
 </ScrollView>

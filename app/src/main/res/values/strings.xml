@@ -49,5 +49,6 @@
         students review and to test their knowledge before taking tests or exams, to know what are
         the things they already know in the subject.
     </string>
+    <string name="view_source">View Source on GitHub</string>
 
 </resources>
