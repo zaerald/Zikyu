@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private static final String SAVED_MISTAKE_ANSWER = "SAVED_MISTAKE_ANSWER";
     private static final String SAVED_IS_INITIALIZED = "SAVED_IS_INITIALIZED";
 
+    private final int DELAY_BACK_EXIT = 1500;
+
     RadioGroup mRadioGroup;
     Button mOkButton;
     TextView mTextQuestion;
@@ -50,6 +54,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private int mCorrect;
     private int mMistake;
     private boolean isInitialized;
+    private boolean mIsBackPressed;
 
     public static Intent getStartIntent(Context context, boolean isMistakesLoaded) {
         Intent intent = new Intent(context, QnaAnswerActivity.class);
@@ -166,6 +171,24 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsBackPressed) {
+            super.onBackPressed();
+            return;
+        }
+
+        mIsBackPressed = true;
+        Toast.makeText(this, R.string.msg_confirm_exit, Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIsBackPressed = false;
+            }
+        }, DELAY_BACK_EXIT);
     }
 
     /**
