@@ -73,16 +73,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mOkButton = (Button) findViewById(R.id.btn_ok);
-        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (mIsInitialized) mOkButton.setEnabled(true);
-            }
-        });
-        initRadioGroup();
-        mTextQuestion = (TextView) findViewById(R.id.text_question);
+        initViewObjects();
 
         mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
@@ -90,31 +81,14 @@ public class QnaAnswerActivity extends AppCompatActivity {
         // check if mistake is loaded
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
-        if (isMistakesLoaded) {
-            mQnaList = new ArrayList<>(QnaAnswerState.getInstance().getMistakeQnaList());
-            QnaAnswerState.getInstance().setQnaList(mQnaList);
-            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
-            mMistakeQnaList.clear();
-            Log.d(TAG, "Clean mistakeList");
-            Log.d(TAG, "mQnaList Size: " + mQnaList.size());
-            Log.d(TAG, "Mistakes Loaded!");
-        }
+        if (isMistakesLoaded)  loadMistakes();
+
         // set qna list
         mQnaList = QnaAnswerState.getInstance().getQnaList(!isMistakesLoaded);
 
         // retrieve saved instances
         if (savedInstanceState != null) {
-            mMistakeQnaList = new ArrayList<>();
-            mQnaList = new ArrayList<>();
-            mMistakeQnaList = QnaAnswerState.getInstance().getMistakeQnaList();
-            mQnaList = QnaAnswerState.getInstance().getQnaList(false);
-            mRandomAnswers = QnaAnswerState.getInstance().getRandomAnswers();
-
-            mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
-            mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
-            mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
-            mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
-            mIsInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
+            updateInstances(savedInstanceState);
 
             updateTextProgress();
             updateQuestionText();
@@ -163,10 +137,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_quit:
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                quitApplication();
                 break;
         }
 
@@ -219,6 +190,30 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
     }
 
+    private void loadMistakes() {
+        mQnaList = new ArrayList<>(QnaAnswerState.getInstance().getMistakeQnaList());
+        QnaAnswerState.getInstance().setQnaList(mQnaList);
+        Log.d(TAG, "mQnaList Size: " + mQnaList.size());
+        mMistakeQnaList.clear();
+        Log.d(TAG, "Clean mistakeList");
+        Log.d(TAG, "mQnaList Size: " + mQnaList.size());
+        Log.d(TAG, "Mistakes Loaded!");
+    }
+
+    private void updateInstances(Bundle savedInstanceState) {
+        mMistakeQnaList = new ArrayList<>();
+        mQnaList = new ArrayList<>();
+        mMistakeQnaList = QnaAnswerState.getInstance().getMistakeQnaList();
+        mQnaList = QnaAnswerState.getInstance().getQnaList(false);
+        mRandomAnswers = QnaAnswerState.getInstance().getRandomAnswers();
+
+        mQnaIndex = savedInstanceState.getInt(SAVED_QNA_INDEX);
+        mAnswerLocationIndex = savedInstanceState.getInt(SAVED_ANSWER_LOCATION_INDEX);
+        mCorrect = savedInstanceState.getInt(SAVED_CORRECT_ANSWER);
+        mMistake = savedInstanceState.getInt(SAVED_MISTAKE_ANSWER);
+        mIsInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
+    }
+
     /**
      * Method to initialize a question and answer,
      * updates GUI and will run on every increment of mQnaIndex
@@ -239,7 +234,18 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mIsInitialized = true;
     }
 
-    private void initRadioGroup() {
+    private void initViewObjects() {
+        mOkButton = (Button) findViewById(R.id.btn_ok);
+        mTextQuestion = (TextView) findViewById(R.id.text_question);
+
+        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (mIsInitialized) mOkButton.setEnabled(true);
+            }
+        });
+
         RadioButton btnOne = (RadioButton) findViewById(R.id.radio_one);
         RadioButton btnTwo = (RadioButton) findViewById(R.id.radio_two);
         RadioButton btnThree = (RadioButton) findViewById(R.id.radio_three);
@@ -385,5 +391,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
             passing = (total / 2) + 1;
 
         return passing;
+    }
+
+    private void quitApplication() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
