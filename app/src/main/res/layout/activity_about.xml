@@ -54,6 +54,7 @@
             android:id="@+id/text_view_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClickViewSource"
             android:text="@string/view_source"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
