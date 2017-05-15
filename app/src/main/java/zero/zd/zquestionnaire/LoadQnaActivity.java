@@ -44,10 +44,7 @@ public class LoadQnaActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mSubjectList = new ArrayList<>();
-        mSubjectList.add(QnaHelper.getBasicQnA());
-        mSubjectList.add(QnaHelper.getBasicQnaSmall());
-        mSubjectList.add(QnaHelper.getBasicQnaMultiple());
+        populateSubjectList();
 
         ListView list = (ListView) findViewById(R.id.list);
         ArrayAdapter adapter =
@@ -73,6 +70,13 @@ public class LoadQnaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void populateSubjectList() {
+        mSubjectList = new ArrayList<>();
+        mSubjectList.add(QnaHelper.getBasicQnA());
+        mSubjectList.add(QnaHelper.getBasicQnaSmall());
+        mSubjectList.add(QnaHelper.getBasicQnaMultiple());
+    }
+
     private static class ViewHolder {
         private TextView subjectName;
         private TextView qnaCount;
@@ -83,8 +87,7 @@ public class LoadQnaActivity extends AppCompatActivity {
         private int mResource;
         private ArrayList<QnaSubject> mSubjectList;
 
-
-        public SubjectArrayAdapter(
+        SubjectArrayAdapter(
                 Context context, int resource, ArrayList<QnaSubject> subjectList) {
             super(context, resource, subjectList);
             mContext = context;

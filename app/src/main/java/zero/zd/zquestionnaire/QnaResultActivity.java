@@ -16,10 +16,10 @@ public class QnaResultActivity extends AppCompatActivity {
     private static final String EXTRA_ASSESSMENT = "EXTRA_ASSESSMENT";
     private static final String EXTRA_CORRECT = "EXTRA_CORRECT";
 
+    private TextView mAssessmentText;
     private boolean mIsReset;
 
-    public static Intent getStartIntent(
-            Context context, String assessment, int correct) {
+    public static Intent getStartIntent(Context context, String assessment, int correct) {
         Intent intent = new Intent(context, QnaResultActivity.class);
         intent.putExtra(EXTRA_ASSESSMENT, assessment);
         intent.putExtra(EXTRA_CORRECT, correct);
@@ -40,15 +40,12 @@ public class QnaResultActivity extends AppCompatActivity {
         int qnaTotal = QnaAnswerState.getInstance().getQnaList(false).size();
         Log.d(TAG, "Correct: " + correct);
 
-        // update assessment message
-        TextView textAssessment = (TextView) findViewById(R.id.text_msg_assessment);
-        textAssessment.setText(assessment);
+        mAssessmentText = (TextView) findViewById(R.id.text_msg_assessment);
+        mAssessmentText.setText(assessment);
         if (assessment.equalsIgnoreCase("passed!")) {
-            textAssessment.setTextColor(ResourcesCompat
-                    .getColor(getResources(), R.color.assessment_passed, null));
+            updateAssessmentTextColor(R.color.assessment_passed);
         } else {
-            textAssessment.setTextColor(ResourcesCompat
-                    .getColor(getResources(), R.color.assessment_failed, null));
+            updateAssessmentTextColor(R.color.assessment_failed);
         }
 
         // update result message
@@ -58,23 +55,28 @@ public class QnaResultActivity extends AppCompatActivity {
         // update button
         Button mAnswerButton = (Button) findViewById(R.id.button_answer);
         if (correct == qnaTotal) {
-            // reset
             mAnswerButton.setText(getResources().getString(R.string.action_reset_qna));
             mIsReset = true;
         } else {
-            // reload mistake
             mAnswerButton.setText(getResources().getString(R.string.action_answer_mistake));
             mIsReset = false;
         }
     }
 
     public void onClickAnswer(View view) {
-        startActivity(QnaAnswerActivity.getStartIntent(QnaResultActivity.this, !mIsReset));
+        startActivity(QnaAnswerActivity
+                .getStartIntent(QnaResultActivity.this, !mIsReset));
         finish();
     }
 
     public void onClickLoadDifferentQna(View view) {
-        startActivity(LoadQnaActivity.getStartIntent(QnaResultActivity.this));
+        startActivity(LoadQnaActivity
+                .getStartIntent(QnaResultActivity.this));
         finish();
+    }
+
+    private void updateAssessmentTextColor(int color) {
+        mAssessmentText.setTextColor(ResourcesCompat
+                .getColor(getResources(), color, null));
     }
 }
