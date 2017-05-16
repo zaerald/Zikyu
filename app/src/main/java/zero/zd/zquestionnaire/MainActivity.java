@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickBuilder(View view) {
-        startActivity(QnaBuilderActivity.getStartIntent(MainActivity.this));
+        Toast.makeText(this, "QnA Builder Feature is on Progress, expect it on first release", Toast.LENGTH_SHORT).show();
+//        startActivity(QnaBuilderActivity.getStartIntent(MainActivity.this));
     }
 
 }
