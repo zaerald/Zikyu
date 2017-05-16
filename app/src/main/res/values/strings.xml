@@ -44,7 +44,7 @@
     <!-- START: About Activity -->
     <string name="title_about_activity">About</string>
     <string name="action_info">Show Information</string>
-    <string name="msg_version">Version: 0.2.1</string>
+    <string name="msg_version">BETA Version: 0.2.2</string>
     <string name="msg_developer">Developer: Zaerald Denze Lungos</string>
     <string name="msg_app_description">Simple reviewer in Android. Lets you answer identification
         questions with multiple choices, to practice and tackle the questions repeatedly. To help
