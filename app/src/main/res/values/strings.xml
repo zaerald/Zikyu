@@ -46,7 +46,7 @@
     <string name="action_info">Show Information</string>
     <string name="msg_version">BETA Version: 0.2.2</string>
     <string name="msg_developer">Developer: Zaerald Denze Lungos</string>
-    <string name="msg_app_description">Simple reviewer in Android. Lets you answer identification
+    <string name="msg_app_description">Simple reviewer application that lets you answer identification
         questions with multiple choices, to practice and tackle the questions repeatedly. To help
         students review and to test their knowledge before taking tests or exams, to know what are
         the things they already know in the subject.
