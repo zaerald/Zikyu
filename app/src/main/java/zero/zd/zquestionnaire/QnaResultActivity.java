@@ -70,7 +70,7 @@ public class QnaResultActivity extends AppCompatActivity {
     }
 
     public void onClickLoadDifferentQna(View view) {
-        startActivity(LoadQnaActivity
+        startActivity(QnaLoadActivity
                 .getStartIntent(QnaResultActivity.this));
         finish();
     }

@@ -20,14 +20,14 @@ import java.util.ArrayList;
 
 import zero.zd.zquestionnaire.model.QnaSubject;
 
-public class LoadQnaActivity extends AppCompatActivity {
+public class QnaLoadActivity extends AppCompatActivity {
 
-    private static final String TAG = LoadQnaActivity.class.getSimpleName();
+    private static final String TAG = QnaLoadActivity.class.getSimpleName();
 
     private ArrayList<QnaSubject> mSubjectList;
 
     public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, LoadQnaActivity.class);
+        Intent intent = new Intent(context, QnaLoadActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
@@ -55,7 +55,7 @@ public class LoadQnaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 QnaAnswerState.getInstance().setQnaSubject(mSubjectList.get(position));
-                startActivity(QnaAnswerActivity.getStartIntent(LoadQnaActivity.this, false));
+                startActivity(QnaAnswerActivity.getStartIntent(QnaLoadActivity.this, false));
             }
         });
     }

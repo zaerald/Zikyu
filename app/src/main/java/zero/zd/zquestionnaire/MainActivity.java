@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickAnswer(View view) {
-        startActivity(LoadQnaActivity.getStartIntent(MainActivity.this));
+        startActivity(QnaLoadActivity.getStartIntent(MainActivity.this));
     }
 
     public void onClickBuilder(View view) {
