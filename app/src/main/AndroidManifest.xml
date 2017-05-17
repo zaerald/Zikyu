@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".QnaAnswerActivity"/>
         <activity android:name=".QnaBuilderActivity"/>
-        <activity android:name=".LoadQnaActivity"/>
+        <activity android:name=".QnaLoadActivity"/>
         <activity android:name=".QnaResultActivity"/>
         <activity android:name=".AboutActivity">
         </activity>
