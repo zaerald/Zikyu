@@ -83,7 +83,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         initViewObjects();
 
         mPreferences = getSharedPreferences(PREFS_SOUND, MODE_PRIVATE);
-        mIsSoundEnabled = mPreferences.getBoolean(KEY_SOUND_ENABLED, false);
+        mIsSoundEnabled = mPreferences.getBoolean(KEY_SOUND_ENABLED, true);
 
         mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
