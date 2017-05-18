@@ -45,7 +45,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
     final int DELAY_BACK_EXIT = 1500;
 
-    private SharedPreferences prefs;
+    private SharedPreferences mPreferences;
 
     RadioGroup mRadioGroup;
     Button mOkButton;
@@ -82,8 +82,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         initViewObjects();
 
-        prefs = getSharedPreferences(PREFS_SOUND, MODE_PRIVATE);
-        mIsSoundEnabled = prefs.getBoolean(KEY_SOUND_ENABLED, false);
+        mPreferences = getSharedPreferences(PREFS_SOUND, MODE_PRIVATE);
+        mIsSoundEnabled = mPreferences.getBoolean(KEY_SOUND_ENABLED, false);
 
         mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
@@ -191,10 +191,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         // get radio location
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedRadioButton = radioGroup.indexOfChild(radioGroup
+        int selectedIndexRadioButton = radioGroup.indexOfChild(radioGroup
                 .findViewById(radioGroup.getCheckedRadioButtonId()));
 
-        if (selectedRadioButton != mAnswerLocationIndex) {
+        if (selectedIndexRadioButton != mAnswerLocationIndex) {
             // add QnA to mistake list
             mMistakeQnaList.add(mQnaList.get(mQnaIndex));
 
@@ -420,7 +420,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mIsSoundEnabled = !mIsSoundEnabled;
         soundItem.setChecked(mIsSoundEnabled);
 
-        SharedPreferences.Editor prefsEditor = prefs.edit();
+        SharedPreferences.Editor prefsEditor = mPreferences.edit();
         prefsEditor.putBoolean(KEY_SOUND_ENABLED, mIsSoundEnabled);
         prefsEditor.apply();
     }
