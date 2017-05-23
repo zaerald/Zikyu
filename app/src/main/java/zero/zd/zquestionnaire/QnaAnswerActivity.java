@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -207,6 +209,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
             if (mIsSoundEnabled)
                 MediaPlayer.create(this, R.raw.correct).start();
         }
+
+        animateUI();
     }
 
     private void loadMistakes() {
@@ -326,6 +330,8 @@ public class QnaAnswerActivity extends AppCompatActivity {
 
         Snackbar.make(getWindow().getDecorView().getRootView(),
                 R.string.msg_reset, Snackbar.LENGTH_SHORT).show();
+
+        animateUI();
     }
 
     private void updateQna() {
@@ -398,6 +404,28 @@ public class QnaAnswerActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPreferences.edit();
         prefsEditor.putBoolean(KEY_SOUND_ENABLED, mIsSoundEnabled);
         prefsEditor.apply();
+    }
+
+    private void animateUI() {
+        Animation questionAnimation = AnimationUtils
+                .loadAnimation(this, R.anim.fade_in);
+
+        final int inBetweenDelay = 70;
+        for (int i = 0; i < mRadioList.size(); i++) {
+            final RadioButton radioButton = mRadioList.get(i);
+
+            int delay = i * inBetweenDelay;
+            mRadioGroup.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation radioAnimation = AnimationUtils
+                            .loadAnimation(QnaAnswerActivity.this, R.anim.fade_in);
+                    radioButton.startAnimation(radioAnimation);
+                }
+            }, delay);
+        }
+
+        mTextQuestion.startAnimation(questionAnimation);
     }
 
     private void quitApplication() {
