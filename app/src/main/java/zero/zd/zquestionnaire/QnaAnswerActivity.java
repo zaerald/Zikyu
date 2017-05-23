@@ -183,10 +183,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }, DELAY_BACK_EXIT);
     }
 
-    /**
-     * Methods for to check if answer is correct,
-     * and update QnA
-     */
     public void onClickOk(View view) {
 
         // get radio location
@@ -237,10 +233,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mIsInitialized = savedInstanceState.getBoolean(SAVED_IS_INITIALIZED);
     }
 
-    /**
-     * Method to initialize a question and answer,
-     * updates GUI and will run on every increment of mQnaIndex
-     */
     private void initQnA() {
         updateQuestionText();
 
@@ -281,12 +273,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mRadioList.add(btnFour);
     }
 
-    /**
-     * Generates an invalid random answers
-     * which is not the same as the answer
-     *
-     * @return answerArray - generated random array of answers
-     */
     private String[] generateRandomAnswers() {
         String[] answerArray = new String[3];
 
@@ -308,14 +294,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         return answerArray;
     }
 
-    /**
-     * Checks if the newly generated random answer exists
-     * on the array of random answer
-     *
-     * @param answerArray  the array of random answers
-     * @param randomAnswer the newly generated random answer
-     * @return true if the generated random answer is already at the array
-     */
     private boolean doesRandomAnswerExists(String[] answerArray, String randomAnswer) {
         for (String answer : answerArray) {
             if (answer == null) return false;
@@ -337,9 +315,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Resets the states of the variables, for resetting QnA
-     */
     private void resetQnA() {
         mQnaIndex = 0;
         mCorrect = 0;
