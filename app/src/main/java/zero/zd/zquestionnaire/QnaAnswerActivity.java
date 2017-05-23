@@ -158,10 +158,6 @@ public class QnaAnswerActivity extends AppCompatActivity {
             case R.id.action_sound:
                 toggleSound(item);
                 break;
-
-            case R.id.action_quit:
-                quitApplication();
-                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -426,12 +422,5 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
 
         mTextQuestion.startAnimation(questionAnimation);
-    }
-
-    private void quitApplication() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 }
