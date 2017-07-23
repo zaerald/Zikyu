@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zikyu;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import zero.zd.zquestionnaire.model.QnA;
+import zero.zd.zikyu.model.QnA;
 
 public class QnaAnswerActivity extends AppCompatActivity {
 

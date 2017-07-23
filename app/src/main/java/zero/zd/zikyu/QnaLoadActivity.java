@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zikyu;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import zero.zd.zquestionnaire.model.QnaSubject;
+import zero.zd.zikyu.model.QnaSubject;
 
 public class QnaLoadActivity extends AppCompatActivity {
 

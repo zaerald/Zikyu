@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZQuestionnaire</string>
+    <string name="app_name">Zikyu</string>
 
     <!--START: MainActivity-->
     <string name="action_answer_qna">Answer QNA</string>

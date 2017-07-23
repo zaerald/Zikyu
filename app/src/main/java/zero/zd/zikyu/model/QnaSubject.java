@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire.model;
+package zero.zd.zikyu.model;
 
 import java.util.ArrayList;
 

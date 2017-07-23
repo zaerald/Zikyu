@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire.model;
+package zero.zd.zikyu.model;
 
 /**
  * QnA class for creating Questions and Answers, this class provides
