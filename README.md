@@ -1,4 +1,4 @@
-# ZQuestionnaire
+# Zikyu
 
 Simple reviewer application that lets you answer identification questions with multiple choices, to practice and tackle the questions repeatedly.
 To help students review and to test their knowledge before taking tests or exams, to know what are the things they already know in the subject.
