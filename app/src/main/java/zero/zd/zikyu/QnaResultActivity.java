@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zikyu;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zikyu;
 
 import org.junit.Test;
 

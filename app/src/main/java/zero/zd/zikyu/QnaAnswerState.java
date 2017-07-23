@@ -1,9 +1,9 @@
-package zero.zd.zquestionnaire;
+package zero.zd.zikyu;
 
 import java.util.ArrayList;
 
-import zero.zd.zquestionnaire.model.QnA;
-import zero.zd.zquestionnaire.model.QnaSubject;
+import zero.zd.zikyu.model.QnA;
+import zero.zd.zikyu.model.QnaSubject;
 
 public class QnaAnswerState {
     private static final String TAG = QnaAnswerState.class.getSimpleName();
