@@ -22,8 +22,6 @@ import zero.zd.zikyu.model.QnaSubject;
 
 public class QnaLoadActivity extends AppCompatActivity {
 
-    private static final String TAG = QnaLoadActivity.class.getSimpleName();
-
     private ArrayList<QnaSubject> mSubjectList;
 
     public static Intent getStartIntent(Context context) {

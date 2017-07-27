@@ -26,7 +26,6 @@ public class QnaBuilderActivity extends AppCompatActivity {
             actionBar.setTitle("QnA Builder");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class QnaResultActivity extends AppCompatActivity {
 
     private static final String TAG = QnaResultActivity.class.getSimpleName();
+
     private static final String EXTRA_ASSESSMENT = "EXTRA_ASSESSMENT";
     private static final String EXTRA_CORRECT = "EXTRA_CORRECT";
 
@@ -48,11 +49,9 @@ public class QnaResultActivity extends AppCompatActivity {
             updateAssessmentTextColor(R.color.assessment_failed);
         }
 
-        // update result message
         TextView textResult = (TextView) findViewById(R.id.text_msg_result);
         textResult.setText(getResources().getString(R.string.msg_result, correct, qnaTotal));
 
-        // update button
         Button mAnswerButton = (Button) findViewById(R.id.button_answer);
         if (correct == qnaTotal) {
             mAnswerButton.setText(getResources().getString(R.string.action_reset_qna));

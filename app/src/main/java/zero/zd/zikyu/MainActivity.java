@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickBuilder(View view) {
         Toast.makeText(this, "QnA Builder Feature is on Progress, expect it on first release", Toast.LENGTH_SHORT).show();
-//        startActivity(QnaBuilderActivity.getStartIntent(MainActivity.this));
     }
 
 }

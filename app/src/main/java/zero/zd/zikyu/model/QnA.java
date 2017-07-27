@@ -2,7 +2,7 @@ package zero.zd.zikyu.model;
 
 /**
  * QnA class for creating Questions and Answers, this class provides
- * methods for accessing questions and asnwers
+ * methods for accessing questions and answers
  */
 
 public class QnA {

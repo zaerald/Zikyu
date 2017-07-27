@@ -46,13 +46,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private static final String PREFS_SOUND = "PREFS_SOUND";
 
     final int DELAY_BACK_EXIT = 1500;
-
-    private SharedPreferences mPreferences;
-
     RadioGroup mRadioGroup;
     Button mOkButton;
     TextView mTextQuestion;
-
+    private SharedPreferences mPreferences;
     private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
     private ArrayList<RadioButton> mRadioList;
@@ -93,7 +90,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
         // check if mistake is loaded
         boolean isMistakesLoaded = getIntent()
                 .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
-        if (isMistakesLoaded)  loadMistakes();
+        if (isMistakesLoaded) loadMistakes();
 
         // set qna list
         mQnaList = QnaAnswerState.getInstance().getQnaList(!isMistakesLoaded);
@@ -368,11 +365,9 @@ public class QnaAnswerActivity extends AppCompatActivity {
     }
 
     private void showResultActivity() {
-        // update mistake list
         QnaAnswerState.getInstance().setQnaList(mQnaList);
         QnaAnswerState.getInstance().setMistakeQnaList(mMistakeQnaList);
 
-        // get passing
         String assessment = "Failed!";
         if (mCorrect >= getPassingScore() && mCorrect != 0)
             assessment = "Passed!";
