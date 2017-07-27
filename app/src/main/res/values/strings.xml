@@ -19,6 +19,7 @@
     <string name="action_sound">Sound</string>
 
     <!--START: QnaBuilderActivity-->
+    <string name="title_qna_builder">QnA Builder</string>
     <string name="msg_question">Question</string>
     <string name="msg_enter_question">Enter your question here.</string>
     <string name="msg_answer">Answer</string>

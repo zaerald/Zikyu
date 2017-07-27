@@ -23,7 +23,7 @@ public class QnaBuilderActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle("QnA Builder");
+            actionBar.setTitle(R.string.title_qna_builder);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
