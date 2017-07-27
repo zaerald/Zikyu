@@ -6,7 +6,6 @@ import zero.zd.zikyu.model.QnA;
 import zero.zd.zikyu.model.QnaSubject;
 
 public class QnaAnswerState {
-    private static final String TAG = QnaAnswerState.class.getSimpleName();
     private static final QnaAnswerState S_QNA_ANSWER_STATE_INSTANCE = new QnaAnswerState();
 
     private QnaSubject mQnaSubject;
@@ -30,8 +29,7 @@ public class QnaAnswerState {
     }
 
     public ArrayList<QnA> getQnaList(boolean isOriginalList) {
-        if (isOriginalList)
-            return mQnaSubject.getQnaList();
+        if (isOriginalList) return mQnaSubject.getQnaList();
         return mQnaList;
     }
 

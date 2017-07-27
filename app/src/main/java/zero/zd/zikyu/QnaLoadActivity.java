@@ -43,19 +43,7 @@ public class QnaLoadActivity extends AppCompatActivity {
         }
 
         populateSubjectList();
-
-        ListView list = (ListView) findViewById(R.id.list);
-        ArrayAdapter adapter =
-                new SubjectArrayAdapter(this, R.layout.list_subject, mSubjectList);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                QnaAnswerState.getInstance().setQnaSubject(mSubjectList.get(position));
-                startActivity(QnaAnswerActivity.getStartIntent(QnaLoadActivity.this, false));
-            }
-        });
+        initViews();
     }
 
     @Override
@@ -73,6 +61,21 @@ public class QnaLoadActivity extends AppCompatActivity {
         mSubjectList.add(QnaHelper.getBasicQnA());
         mSubjectList.add(QnaHelper.getBasicQnaSmall());
         mSubjectList.add(QnaHelper.getBasicQnaMultiple());
+    }
+
+    private void initViews() {
+        ListView list = (ListView) findViewById(R.id.list);
+        ArrayAdapter adapter =  new SubjectArrayAdapter(this,
+                R.layout.list_subject, mSubjectList);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                QnaAnswerState.getInstance().setQnaSubject(mSubjectList.get(position));
+                startActivity(QnaAnswerActivity.getStartIntent(QnaLoadActivity.this, false));
+            }
+        });
     }
 
     private static class ViewHolder {
@@ -116,8 +119,8 @@ public class QnaLoadActivity extends AppCompatActivity {
                 convertView = inflater.inflate(mResource, parent, false);
 
                 viewHolder = new ViewHolder();
-                viewHolder.subjectName = (TextView) convertView.findViewById(R.id.text_subject_name);
-                viewHolder.qnaCount = (TextView) convertView.findViewById(R.id.text_qna_count);
+                viewHolder.subjectName = convertView.findViewById(R.id.text_subject_name);
+                viewHolder.qnaCount = convertView.findViewById(R.id.text_qna_count);
 
                 convertView.setTag(viewHolder);
             } else viewHolder = (ViewHolder) convertView.getTag();

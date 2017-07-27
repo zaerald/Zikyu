@@ -80,12 +80,12 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btn_ok"
+        android:id="@+id/btn_check_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight=".05"
         android:enabled="false"
-        android:onClick="onClickOk"
+        android:onClick="onClickCheckAnswer"
         android:text="@string/action_check_answer"/>
 
 </LinearLayout>

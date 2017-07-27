@@ -88,15 +88,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
         mQnaList = new ArrayList<>();
         mMistakeQnaList = new ArrayList<>();
 
-        // check if mistake is loaded
-        boolean isMistakesLoaded = getIntent()
-                .getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
+        boolean isMistakesLoaded = getIntent().getBooleanExtra(EXTRA_IS_MISTAKE_LOADED, false);
         if (isMistakesLoaded) loadMistakes();
 
-        // set qna list
         mQnaList = QnaAnswerState.getInstance().getQnaList(!isMistakesLoaded);
 
-        // retrieve saved instances
         if (savedInstanceState != null) {
             updateInstances(savedInstanceState);
 
@@ -185,15 +181,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
         releaseMediaPlayer();
     }
 
-    public void onClickOk(View view) {
+    public void onClickCheckAnswer(View view) {
 
-        // get radio location
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedIndexRadioButton = radioGroup.indexOfChild(radioGroup
-                .findViewById(radioGroup.getCheckedRadioButtonId()));
+        int selectedIndexRadioButton = getSelectedIndexRadioGroup(radioGroup);
 
         if (selectedIndexRadioButton != mAnswerLocationIndex) {
-            // add QnA to mistake list
             mMistakeQnaList.add(mQnaList.get(mQnaIndex));
 
             showMistakeDialog();
@@ -209,6 +202,10 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }
 
         animateUI();
+    }
+
+    private int getSelectedIndexRadioGroup(RadioGroup rg) {
+        return rg.indexOfChild(rg.findViewById(rg.getCheckedRadioButtonId()));
     }
 
     private void loadMistakes() {
