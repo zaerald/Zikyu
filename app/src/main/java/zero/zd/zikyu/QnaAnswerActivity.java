@@ -53,6 +53,7 @@ public class QnaAnswerActivity extends AppCompatActivity {
     private ArrayList<QnA> mQnaList;
     private ArrayList<QnA> mMistakeQnaList;
     private ArrayList<RadioButton> mRadioList;
+    private MediaPlayer mMediaPlayer;
     private String[] mRandomAnswers;
     private int mQnaIndex;
     private int mAnswerLocationIndex;
@@ -178,6 +179,12 @@ public class QnaAnswerActivity extends AppCompatActivity {
         }, DELAY_BACK_EXIT);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
     public void onClickOk(View view) {
 
         // get radio location
@@ -192,15 +199,13 @@ public class QnaAnswerActivity extends AppCompatActivity {
             showMistakeDialog();
             mMistake++;
 
-            if (mIsSoundEnabled)
-                MediaPlayer.create(this, R.raw.mistake).start();
+            if (mIsSoundEnabled) playSound(R.raw.mistake);
         } else {
             Snackbar.make(view, R.string.msg_correct, Snackbar.LENGTH_SHORT).show();
             mCorrect++;
             updateQna();
 
-            if (mIsSoundEnabled)
-                MediaPlayer.create(this, R.raw.correct).start();
+            if (mIsSoundEnabled) playSound(R.raw.correct);
         }
 
         animateUI();
@@ -388,6 +393,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
         return passing;
     }
 
+    private void playSound(int sound) {
+        mMediaPlayer = MediaPlayer.create(this, sound);
+        mMediaPlayer.start();
+    }
+
     private void toggleSound(MenuItem soundItem) {
         mIsSoundEnabled = !mIsSoundEnabled;
         soundItem.setChecked(mIsSoundEnabled);
@@ -395,6 +405,11 @@ public class QnaAnswerActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPreferences.edit();
         prefsEditor.putBoolean(KEY_SOUND_ENABLED, mIsSoundEnabled);
         prefsEditor.apply();
+    }
+
+    private void releaseMediaPlayer() {
+        mMediaPlayer.release();
+        mMediaPlayer = null;
     }
 
     private void animateUI() {
