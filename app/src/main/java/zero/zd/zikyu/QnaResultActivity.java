@@ -16,8 +16,8 @@ public class QnaResultActivity extends AppCompatActivity {
     private static final String EXTRA_ASSESSMENT = "EXTRA_ASSESSMENT";
     private static final String EXTRA_CORRECT = "EXTRA_CORRECT";
 
-    private TextView mAssessmentText;
-    private boolean mIsReset;
+    private TextView assessmentText;
+    private boolean isReset;
 
     public static Intent getStartIntent(Context context, String assessment, int correct) {
         Intent intent = new Intent(context, QnaResultActivity.class);
@@ -40,8 +40,8 @@ public class QnaResultActivity extends AppCompatActivity {
         int qnaTotal = QnaAnswerState.getInstance().getQnaList(false).size();
         Log.d(TAG, "Correct: " + correct);
 
-        mAssessmentText = (TextView) findViewById(R.id.text_msg_assessment);
-        mAssessmentText.setText(assessment);
+        assessmentText = (TextView) findViewById(R.id.text_msg_assessment);
+        assessmentText.setText(assessment);
         if (assessment.equalsIgnoreCase("passed!")) {
             updateAssessmentTextColor(R.color.assessment_passed);
         } else {
@@ -56,16 +56,16 @@ public class QnaResultActivity extends AppCompatActivity {
         Button mAnswerButton = (Button) findViewById(R.id.button_answer);
         if (correct == qnaTotal) {
             mAnswerButton.setText(getResources().getString(R.string.action_reset_qna));
-            mIsReset = true;
+            isReset = true;
         } else {
             mAnswerButton.setText(getResources().getString(R.string.action_answer_mistake));
-            mIsReset = false;
+            isReset = false;
         }
     }
 
     public void onClickAnswer(View view) {
         startActivity(QnaAnswerActivity
-                .getStartIntent(QnaResultActivity.this, !mIsReset));
+                .getStartIntent(QnaResultActivity.this, !isReset));
         finish();
     }
 
@@ -76,7 +76,7 @@ public class QnaResultActivity extends AppCompatActivity {
     }
 
     private void updateAssessmentTextColor(int color) {
-        mAssessmentText.setTextColor(ResourcesCompat
+        assessmentText.setTextColor(ResourcesCompat
                 .getColor(getResources(), color, null));
     }
 }
