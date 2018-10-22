@@ -9,10 +9,10 @@ public class QnaAnswerState {
     private static final String TAG = QnaAnswerState.class.getSimpleName();
     private static final QnaAnswerState S_QNA_ANSWER_STATE_INSTANCE = new QnaAnswerState();
 
-    private QnaSubject mQnaSubject;
-    private ArrayList<QnA> mQnaList;
-    private ArrayList<QnA> mMistakeQnaList;
-    private String[] mRandomAnswers;
+    private QnaSubject qnaSubject;
+    private ArrayList<QnA> qnaList;
+    private ArrayList<QnA> mistakeQnaList;
+    private String[] randomAnswers;
 
     private QnaAnswerState() {
     }
@@ -22,43 +22,43 @@ public class QnaAnswerState {
     }
 
     public QnaSubject getQnaSubject() {
-        return mQnaSubject;
+        return qnaSubject;
     }
 
     public void setQnaSubject(QnaSubject qnaSubject) {
-        mQnaSubject = qnaSubject;
+        qnaSubject = qnaSubject;
     }
 
     public ArrayList<QnA> getQnaList(boolean isOriginalList) {
         if (isOriginalList)
-            return mQnaSubject.getQnaList();
-        return mQnaList;
+            return qnaSubject.getQnaList();
+        return qnaList;
     }
 
     public void setQnaList(ArrayList<QnA> qnaList) {
-        mQnaList = qnaList;
+        qnaList = qnaList;
     }
 
     public ArrayList<QnA> getMistakeQnaList() {
-        return mMistakeQnaList;
+        return mistakeQnaList;
     }
 
     public void setMistakeQnaList(ArrayList<QnA> mistakeQnaList) {
-        mMistakeQnaList = mistakeQnaList;
+        mistakeQnaList = mistakeQnaList;
     }
 
     public String[] getRandomAnswers() {
-        return mRandomAnswers;
+        return randomAnswers;
     }
 
     public void setRandomAnswers(String[] randomAnswers) {
-        mRandomAnswers = randomAnswers;
+        randomAnswers = randomAnswers;
     }
 
     @Override
     public String toString() {
         String out = "QNA LIST: \n";
-        for (QnA qna : mQnaSubject.getQnaList()) {
+        for (QnA qna : qnaSubject.getQnaList()) {
             out += qna.toString() + "\n";
         }
         out += "END";
